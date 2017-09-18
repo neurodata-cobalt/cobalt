@@ -14,6 +14,6 @@ pylab.show()
 labeled, nr_objects = mh.label(out_image > T)
 print nr_objects
 
-pylab.imshow(labeled.astype(np.uint8) * 2555)
+pylab.imshow(labeled.astype(np.uint8) * 255)
 pylab.jet()
 pylab.show()
