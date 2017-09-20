@@ -1,15 +1,13 @@
 import numpy as np
 import pylab
 import mahotas as mh
-dna = mh.imread('input.jpg')
-pylab.imshow(dna)
+cell = mh.imread('input.jpg')
+pylab.imshow(cell)
 pylab.show()
 
-T = mh.thresholding.otsu(dna)
-out_image = (dna > T)
+T = mh.thresholding.otsu(cell)
+out_image = (cell > T)
 out_image = out_image.astype(np.uint8) * 255
-pylab.imshow(out_image)
-pylab.show()
 
 labeled, nr_objects = mh.label(out_image > T)
 print nr_objects
