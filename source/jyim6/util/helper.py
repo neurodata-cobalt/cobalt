@@ -116,23 +116,8 @@ def visualize_volume(volume):
 def save_tif(img, fname):
     if ".tif" not in fname:
         fname = fname + ".tif"
-    dim = img.shape
-    if len(dim) == 4 and dim[3] == 3:
-        imsave(fname, img.astype(np.uint8))
-    else:
-        new_img = np.zeros((dim[0], dim[1], dim[2], 3))
-        max_val = np.amax(img)
-        i = 0
-        img = int(np.multiply(np.divide(img, max_val), 255))
-        for i in range(dim[0]):
-            for j in range(dim[1]):
-                for k in range(dim[2]):
-                    val = int(255*(img[i][j][k]/max_val))
-                    new_img[k][j][i][0] = val
-                    new_img[k][j][i][1] = val
-                    new_img[k][j][i][2] = val
-        imsave(fname, new_img.astype(np.uint8))
-    print("Saved tif as: ", fname)
+    imsave("../img/"+fname, img.astype(np.uint8))
+    print("Saved tif as: ", fname, " at ", "../img/"+fname)
 
 
 if __name__ == '__main__':
