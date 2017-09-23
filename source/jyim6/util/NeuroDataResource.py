@@ -50,7 +50,7 @@ class NeuroDataResource:
         '''
         if (not fname) or (type(fname) != str):
             print('Error: Give valid filename')
-        if (not cutout) or type(cutout) != np.array):
+        if (not cutout) or type(cutout) != np.array:
             print('Error: Give valid image cutout')
 
         if format == 'tif':
