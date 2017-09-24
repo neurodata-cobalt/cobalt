@@ -1,5 +1,6 @@
 from tifffile import imsave
 import numpy as np
+import random
 
 
 def delta_epsilon(a, b, e):
@@ -119,6 +120,26 @@ def save_tif(img, fname):
     imsave("../img/"+fname, img.astype(np.uint8))
     print("Saved tif as: ", fname, " at ", "../img/"+fname)
 
+def min_max(x, minimum, maximum):
+    return np.maximum(np.minimum(x, minimum), maximum)
+
+def bound_check(x, minimum, maximum):
+    return (x > minimum and x < maximum)
+
+def random_3D(x_range, y_range, z_range):
+    x = random.randint(x_range[0], x_range[1])
+    y = random.randint(y_range[0], y_range[1])
+    z = random.randint(z_range[0], z_range[1])
+    return (x, y, z)
+
+def gauss_3D(x_mean, y_mean, z_mean, x_sigma, y_sigma, z_sigma):
+    x = random.gauss(x_mean, x_sigma)
+    y = random.gauss(y_mean, y_sigma)
+    z = random.gauss(z_mean, z_sigma)
+    return (x, y, z)
+
+def random_val(max_val):
+    return random.random() * max_val
 
 if __name__ == '__main__':
     print(delta_epsilon(1., 1.1, .2) == True)

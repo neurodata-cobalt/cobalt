@@ -6,8 +6,14 @@ from mpl_toolkits.mplot3d import Axes3D
 
 def show_plot(func):
     def create_plot(cls, *args, **kwargs):
-        func(cls, *args)
-        if 'show_plot' in kwargs:
+        show_plot = True if kwargs.get('show_plot') else False
+        if show_plot:
+            del kwargs['show_plot']
+        if kwargs:
+            func(cls, *args, **kwargs)
+        else:
+            func(cls, *args)
+        if show_plot:
             if kwargs['show_plot']:
                 cls.show_plot()
     return create_plot
