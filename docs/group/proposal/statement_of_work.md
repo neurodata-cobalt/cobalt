@@ -1,11 +1,10 @@
 # Statement of Work
 _______________________________________
 
- 
-Vikram Chandrashekhar
-Jason Yim
-Srivathsa PV
-Jonathan Liu
+Vikram Chandrashekhar<br/>
+Jason Yim<br/>
+Srivathsa PV<br/>
+Jonathan Liu<br/>
 
 | Sprint   | Date Due | Requirements: Portion of manuscript (and package) corresponding to... |
 |---|---|---|
