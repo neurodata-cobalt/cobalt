@@ -22,5 +22,5 @@ covariances and different irregular cell shapes.
 - Set up my environment more by creating lots of helper classes/functions
 
 ### Next week
-- Will pick an algorithm and start implementing it.
+- Will pick a cell-detection algorithm and start implementing it.
 - As the needs arise I will work more on this image generation tool.
