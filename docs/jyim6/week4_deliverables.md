@@ -5,6 +5,7 @@ Jason Yim
 - Based on Ailey-dev, created a Clarity-like image generation tool. 
 - Tool is very basic for now. Able to create ellipsoidal like objects with different properties like size, locations, colors, fade, intensity.
 - It is very customizeable and anyone on the team can use it easily.
+- See [ImageGenerator.py](https://github.com/NeuroDataDesign/clarity-f17s18/tree/master/source/jyim6/util)
 ### Sample generated images
 ![](https://user-images.githubusercontent.com/8682187/30778558-c164613e-a0a6-11e7-8f56-059be39c0da6.png)
 ![](https://user-images.githubusercontent.com/8682187/30778560-c56f44ce-a0a6-11e7-9d98-0d2991814f1c.png)
