@@ -1,4 +1,3 @@
-## disklog.sh
 #!/bin/bash -e
 # run this in the background with nohup ./disklog.sh > disk.txt &
 #

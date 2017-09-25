@@ -1,0 +1,145 @@
+Step translation:
+0.	 -0.196875216122
+1.	 -0.207298070009
+2.	 -0.217720572456
+3.	 -0.228360790592
+4.	 -0.238432086936
+5.	 -0.24860737394
+6.	 -0.258873558781
+7.	 -0.270213268332
+8.	 -0.283120283165
+9.	 -0.295781756556
+10.	 -0.308917870647
+11.	 -0.320427270533
+12.	 -0.332971142201
+13.	 -0.342210393637
+14.	 -0.352168536609
+15.	 -0.361349699861
+16.	 -0.368778509896
+17.	 -0.375328100343
+18.	 -0.378224324491
+19.	 -0.379343731676
+Step scale:
+0.	 -0.459610950519
+1.	 -0.449503932428
+2.	 -0.475420233676
+3.	 -0.465167922444
+4.	 -0.474213000518
+5.	 -0.475221258251
+6.	 -0.475950789744
+7.	 -0.475909025787
+Step rigid:
+0.	 -0.473885463937
+1.	 -0.330912282975
+2.	 -0.436940557981
+3.	 -0.475092016817
+4.	 -0.471461905755
+5.	 -0.479321965102
+6.	 -0.477510812666
+7.	 -0.480167699208
+8.	 -0.479539694429
+9.	 -0.480283254432
+10.	 -0.480357781755
+11.	 -0.480529658905
+Step affine:
+0.	 -0.481599025495
+1.	 -0.435026773946
+2.	 -0.498048006172
+3.	 -0.500801487638
+4.	 -0.506207852627
+5.	 -0.506611847055
+6.	 -0.507341623131
+7.	 -0.50782124244
+8.	 -0.508284084737
+9.	 -0.508704961108
+10.	 -0.509127635684
+11.	 -0.509529786871
+12.	 -0.509930385255
+13.	 -0.510297917869
+14.	 -0.510672686284
+15.	 -0.511007815983
+16.	 -0.511361326824
+17.	 -0.511656818741
+18.	 -0.511980747476
+19.	 -0.512220099822
+20.	 -0.512508432793
+21.	 -0.512713291416
+22.	 -0.512980385322
+23.	 -0.513170421834
+24.	 -0.513419130555
+25.	 -0.513568510557
+26.	 -0.513720715076
+27.	 -0.513870649528
+28.	 -0.514018793723
+29.	 -0.514164735001
+30.	 -0.514308576162
+31.	 -0.514450127786
+32.	 -0.514589277421
+33.	 -0.514726115663
+34.	 -0.514860434773
+35.	 -0.514992335175
+36.	 -0.515121926801
+37.	 -0.515249101592
+38.	 -0.515374024445
+39.	 -0.515496741518
+40.	 -0.515617311787
+41.	 -0.51573578663
+42.	 -0.515852171025
+43.	 -0.515966521099
+44.	 -0.516078858372
+45.	 -0.516189266513
+46.	 -0.516297814561
+47.	 -0.516404527162
+48.	 -0.51650952585
+49.	 -0.516612857852
+50.	 -0.516714601326
+51.	 -0.516814905145
+52.	 -0.516913812726
+53.	 -0.517011455913
+54.	 -0.517107971043
+55.	 -0.517203395009
+56.	 -0.51729787802
+57.	 -0.517391441739
+58.	 -0.517484261835
+59.	 -0.51757630482
+60.	 -0.517667899013
+61.	 -0.517758697232
+62.	 -0.517849447691
+63.	 -0.517938856926
+64.	 -0.518028779387
+65.	 -0.518114373138
+66.	 -0.518199254076
+67.	 -0.518269152105
+68.	 -0.518340011883
+69.	 -0.518397673144
+70.	 -0.518466612539
+
+Step 0: alpha=0.2, beta=0.05, scale=1.0
+Error: Metamorphosis did not terminate normally.
+
+itk::MemoryAllocationError (0x7fc768000940)
+Location: "TElement* itk::ImportImageContainer<TElementIdentifier, TElement>::AllocateElements(itk::ImportImageContainer<TElementIdentifier, TElement>::ElementIdentifier, bool) const [with TElementIdentifier = long unsigned int; TElement = itk::Vector<double, 3u>; itk::ImportImageContainer<TElementIdentifier, TElement>::ElementIdentifier = long unsigned int]" 
+File: /usr/include/ITK-4.9/itkImportImageContainer.hxx
+Line: 199
+Description: Failed to allocate memory for image.
+
+
+Traceback (most recent call last):
+  File "reg_s3617_50um.py", line 201, in <module>
+    scaleList = 1.0, useMI=True, iterations=100, verbose=True)
+  File "/root/.local/lib/python2.7/site-packages/ndreg-0.0.1-py2.7.egg/ndreg/ndreg.py", line 1329, in imgMetamorphosisComposite
+    outDirPath=stepDirPath)
+  File "/root/.local/lib/python2.7/site-packages/ndreg-0.0.1-py2.7.egg/ndreg/ndreg.py", line 1254, in imgMetamorphosis
+    (returnValue, logText) = run(command, verbose=verbose)
+  File "/root/.local/lib/python2.7/site-packages/ndreg-0.0.1-py2.7.egg/ndreg/ndreg.py", line 85, in run
+    if checkReturnValue and (returnValue != 0): raise Exception(outText)
+Exception: Error: Metamorphosis did not terminate normally.
+
+itk::MemoryAllocationError (0x7fc768000940)
+Location: "TElement* itk::ImportImageContainer<TElementIdentifier, TElement>::AllocateElements(itk::ImportImageContainer<TElementIdentifier, TElement>::ElementIdentifier, bool) const [with TElementIdentifier = long unsigned int; TElement = itk::Vector<double, 3u>; itk::ImportImageContainer<TElementIdentifier, TElement>::ElementIdentifier = long unsigned int]" 
+File: /usr/include/ITK-4.9/itkImportImageContainer.hxx
+Line: 199
+Description: Failed to allocate memory for image.
+
+
+

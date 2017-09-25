@@ -1,4 +1,3 @@
-## generate_statistics.sh
 # A function for generating memory and cpu summaries for 50 um ARA registration with ndreg of s3617.
 #
 # Usage: ./generate_statistics.sh /path/to/output/directory

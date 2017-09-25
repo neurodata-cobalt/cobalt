@@ -17,7 +17,7 @@ startTime = time.time()
 
 matplotlib.rcParams['figure.figsize'] = (10.0, 8.0)
 
-# Assume a valid configuration file exists at .keys/intern.cfg.
+# Assume a valid configuration file exists at ~/.intern/intern.cfg.
 cfg_file = '.keys/intern.cfg'
 if cfg_file.startswith('~'): 
     cfg_file = os.path.expanduser('~') + cfg_file[1:]
@@ -166,6 +166,7 @@ refOrient = "ASR"
 
 sampleImgReoriented = imgReorient(sampleImg, sampleOrient, refOrient)
 
+
 # Downsample images
 DOWNSAMPLE_SPACING = 0.010 # millimeters
 spacing = [DOWNSAMPLE_SPACING,DOWNSAMPLE_SPACING,DOWNSAMPLE_SPACING]
@@ -177,14 +178,12 @@ sampleImg_ds = sitk.Clamp(imgResample(sampleImgReoriented, spacing), upperBound=
 sampleImgSize_reorient = sampleImgReoriented.GetSize()
 sampleImgSpacing_reorient= sampleImgReoriented.GetSpacing()
 
-
 # Saving outputs
 # sitk.WriteImage(sitk.Cast(image, sitk.sitkUInt16), 's3617_cutout.tif')
-sitk.WriteImage(sitk.Cast(sampleImg_ds, sitk.sitkUInt16), 'output/sampleImg_ds.tif')
-sitk.WriteImage(sitk.Cast(refImg_ds, sitk.sitkUInt16), 'output/refImg_ds.tif')
-sitk.WriteImage(sitk.Cast(sampleImgReoriented, sitk.sitkUInt16), 'output/sampleImgReoriented.tif')
-sitk.WriteImage(sitk.Cast(refImg, sitk.sitkUInt16), 'output/refImg.tif')
-
+sitk.WriteImage(sampleImg_ds, 'sampleImg_ds.tif')
+sitk.WriteImage(refImg_ds, 'refImg_ds.tif')
+sitk.WriteImage(sampleImgReoriented, 'sampleImgReoriented.tif')
+sitk.WriteImage(refImg, 'refImg.tif')
 
 
 # Affine Registration
@@ -194,10 +193,6 @@ sampleImg_affine = imgApplyAffine(sampleImgReoriented, affine, size=refImg.GetSi
 
 sampleImg_affine_bounded = sitk.Clamp(sampleImg_affine,upperBound=sampleThreshold)
 refImg_bounded = sitk.Clamp(refImg, upperBound=refThreshold)
-
-# Save affine outputs
-sitk.WriteImage(sitk.Cast(sampleImg_affine, sitk.sitkUInt16), 'output/sampleImg_affine.tif')
-sitk.WriteImage(sitk.Cast(sampleImg_affine_bounded, sitk.sitkUInt16), 'output/sampleImg_affine_bounded.tif')
 
 
 # LDDMM Registration
@@ -211,23 +206,3 @@ invAffineField = affineToField(affineInverse(affine), invField.GetSize(), invFie
 invFieldComposite = fieldApplyField(invAffineField, invField)
 
 sampleImg_lddmm = imgApplyField(sampleImgReoriented, fieldComposite, size=refImg.GetSize(), spacing=refImg.GetSpacing())
-
-# Saving outputs after LDDMM
-sitk.WriteImage(sitk.Cast(sampleImg_lddmm, sitk.sitkUInt16), 'output/sampleImg_lddmm.tif')
-
-
-# Deform annotation to sample space
-SAMPLE_COLLECTION = 's3617_to_ara_coll'
-SAMPLE_EXPERIMENT = 's3617_to_ara_exp'
-SAMPLE_CHANNEL = 's3617_to_ara_10um_affine'
-NEW_CHANNEL_NAME = 'annotation_ara_s3617_test4'
-SAMPLE_RESOLUTION = 0
-CHANNEL_TYPE = 'annotation'
-DATATYPE = 'uint64'
-
-refAnnotationImg_lddmm = imgApplyField(refAnnotationImg, invFieldComposite, size=sampleImgReoriented.GetSize(), spacing=sampleImgReoriented.GetSpacing(), useNearest=True)
-
-# convert the reference image to the same orientation as the input image
-refAnnotationImg_lddmm = imgReorient(refAnnotationImg_lddmm, refOrient, sampleOrient)
-
-sitk.WriteImage(sitk.Cast(refAnnotationImg_lddmm, sitk.sitkUInt16), 'output/refAnnotationImg_lddmm.tif')
