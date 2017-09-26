@@ -8,6 +8,7 @@ from NeuroDataResource import NeuroDataResource
 
 import pickle
 import numpy as np
+import os
 
 from requests import HTTPError
 import time
@@ -19,7 +20,7 @@ matplotlib.rcParams['figure.figsize'] = (10.0, 8.0)
 
 # Assume a valid configuration file exists at .keys/intern.cfg.
 cfg_file = '.keys/intern.cfg'
-if cfg_file.startswith('~'): 
+if cfg_file.startswith('~'):
     cfg_file = os.path.expanduser('~') + cfg_file[1:]
 config = configparser.ConfigParser()
 config.read_file(file(cfg_file))
@@ -28,7 +29,7 @@ rmt = BossRemote(cfg_file_or_dict=cfg_file)
 
 REFERENCE_COLLECTION = 'ara_2016'
 REFERENCE_EXPERIMENT = 'sagittal_50um'
-REFERENCE_COORDINATE_FRAME = 'ara_2016' 
+REFERENCE_COORDINATE_FRAME = 'ara_2016'
 REFERENCE_CHANNEL = 'average_50um'
 # Set/Modify these parameters
 REFERENCE_RESOLUTION = 0
@@ -48,15 +49,15 @@ def setup_experiment_boss(remote, collection, experiment):
 
 def setup_channel_boss(remote, collection, experiment, channel, channel_type='image', datatype='uint16'):
     (exp_setup, coord_actual) = setup_experiment_boss(remote, collection, experiment)
- 
+
     chan_setup = ChannelResource(channel, collection, experiment, channel_type, datatype=datatype)
     try:
         chan_actual = remote.get_project(chan_setup)
         return (exp_setup, coord_actual, chan_actual)
     except HTTPError as e:
         print(e.message)
-        
-        
+
+
 def imgDownload_boss(remote, channel_resource, coordinate_frame_resource, resolution=0, size=[], start=[], isotropic=False):
     """
     Download image with given token from given server at given resolution.
@@ -68,7 +69,7 @@ def imgDownload_boss(remote, channel_resource, coordinate_frame_resource, resolu
     voxel_units = ('nanometers', 'micrometers', 'millimeters', 'centimeters')
     factor_divide = (1e-6, 1e-3, 1, 10)
     fact_div = factor_divide[voxel_units.index(voxel_unit)]
-    
+
     spacingBoss = [coordinate_frame_resource.x_voxel_size, coordinate_frame_resource.y_voxel_size, coordinate_frame_resource.z_voxel_size]
     spacing = [x * fact_div for x in spacingBoss] # Convert spacing to mm
     if isotropic:
@@ -80,14 +81,14 @@ def imgDownload_boss(remote, channel_resource, coordinate_frame_resource, resolu
 
     if size == []: size = get_image_size_boss(coordinate_frame_resource, resolution, isotropic)
     if start == []: start = get_offset_boss(coordinate_frame_resource, resolution, isotropic)
-    
+
     #size[2] = 200
     #dataType = metadata['channels'][channel]['datatype']
     dataType = channel_resource.datatype
-    
+
     # Download all image data from specified channel
     array = remote.get_cutout(channel_resource, resolution, [start[0], size[0]], [start[1], size[1]], [start[2], size[2]])
-    
+
     # Cast downloaded image to server's data type
 #     img = sitk.Cast(sitk.GetImageFromArray(array),ndToSitkDataTypes[dataType]) # convert numpy array to sitk image
     img = sitk.Cast(sitk.GetImageFromArray(array),sitk.sitkUInt16) # convert numpy array to sitk image
@@ -111,7 +112,7 @@ refThreshold = imgPercentile(refImg, 0.99)
 
 REFERENCE_ANNOTATION_COLLECTION = 'ara_2016'
 REFERENCE_ANNOTATION_EXPERIMENT = 'sagittal_50um'
-REFERENCE_ANNOTATION_COORDINATE_FRAME = 'ara_2016' 
+REFERENCE_ANNOTATION_COORDINATE_FRAME = 'ara_2016'
 REFERENCE_ANNOTATION_CHANNEL = 'annotation_50um'
 REFERENCE_ANNOTATION_RESOLUTION = REFERENCE_RESOLUTION
 REFERENCE_ANNOTATION_ISOTROPIC = True
@@ -180,6 +181,9 @@ sampleImgSpacing_reorient= sampleImgReoriented.GetSpacing()
 
 # Saving outputs
 # sitk.WriteImage(sitk.Cast(image, sitk.sitkUInt16), 's3617_cutout.tif')
+if not os.path.exists('output'):
+    os.makedirs('output')
+
 sitk.WriteImage(sitk.Cast(sampleImg_ds, sitk.sitkUInt16), 'output/sampleImg_ds.tif')
 sitk.WriteImage(sitk.Cast(refImg_ds, sitk.sitkUInt16), 'output/refImg_ds.tif')
 sitk.WriteImage(sitk.Cast(sampleImgReoriented, sitk.sitkUInt16), 'output/sampleImgReoriented.tif')
