@@ -1,7 +1,7 @@
 from tifffile import imsave
 import numpy as np
 import random
-
+import os
 
 def delta_epsilon(a, b, e):
     return abs(a-b) < e
@@ -117,8 +117,10 @@ def visualize_volume(volume):
 def save_tif(img, fname):
     if ".tif" not in fname:
         fname = fname + ".tif"
-    imsave("../img/"+fname, img.astype(np.uint8))
-    print("Saved tif as: ", fname, " at ", "../img/"+fname)
+    save_path = "../img/"+fname if os.path.isdir("../img/") else fname
+    save_path = "./img/"+fname if os.path.isdir("./img/") else fname
+    imsave(save_path, img.astype(np.uint8))
+    print("Saved tif as: ", fname, " at ", save_path)
 
 def min_max(x, minimum, maximum):
     return np.maximum(np.minimum(x, minimum), maximum)

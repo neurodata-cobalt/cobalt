@@ -46,7 +46,6 @@ class Grapher:
             cls.current_subplot = next
 
     @classmethod
-    @show_plot
     def show_image(cls, img, color='gray'):
         plt.imshow(img, color)
 
