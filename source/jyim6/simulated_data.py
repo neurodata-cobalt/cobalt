@@ -47,7 +47,7 @@ _, centers_3 = img_gen.make_ellipsoidal_image(
 
 
 # Solid cells with gaussian added to the image
-_, centers_3 = img_gen.make_ellipsoidal_image(
+_, centers_4 = img_gen.make_ellipsoidal_image(
     15,
     15,
     5,
@@ -60,7 +60,7 @@ _, centers_3 = img_gen.make_ellipsoidal_image(
 
 
 # cells distributed uniformly at random with overlaps and fade applied
-_, centers_3 = img_gen.make_ellipsoidal_image(
+_, centers_5 = img_gen.make_ellipsoidal_image(
     15,
     15,
     5,
@@ -76,7 +76,7 @@ _, centers_3 = img_gen.make_ellipsoidal_image(
 
 
 # cells distributed standard normal at random with overlaps and fade applied
-_, centers_3 = img_gen.make_ellipsoidal_image(
+_, centers_6 = img_gen.make_ellipsoidal_image(
     15,
     15,
     5,
@@ -91,7 +91,7 @@ _, centers_3 = img_gen.make_ellipsoidal_image(
 )
 
 # More cells distributed standard normal at random with overlaps and fade applied
-_, centers_3 = img_gen.make_ellipsoidal_image(
+_, centers_7 = img_gen.make_ellipsoidal_image(
     10,
     10,
     5,
@@ -101,5 +101,18 @@ _, centers_3 = img_gen.make_ellipsoidal_image(
     random_center = 'gauss',
     blur = True,    
     overlap = True,
-    fname = "blurred_147_randomized_gauss_cells",
+    fname = "blurred_320_randomized_gauss_cells",
+)
+
+# Same as above but no blurring
+_, centers_8 = img_gen.make_ellipsoidal_image(
+    10,
+    10,
+    5,
+    100,
+    100,
+    10,
+    random_center = 'gauss',  
+    overlap = True,
+    fname = "solid_320_randomized_gauss_cells",
 )
