@@ -22,7 +22,7 @@ ret, sure_fg = cv2.threshold(dist_transform,0.7*dist_transform.max(),255,0)
 
 sure_fg = np.uint8(sure_fg)
 
-params = params = cv2.SimpleBlobDetector_Params()
+params = cv2.SimpleBlobDetector_Params()
 
 params.minThreshold = 200
 params.maxThreshold = 256
