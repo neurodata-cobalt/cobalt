@@ -146,6 +146,7 @@ To concisely summarize this algorithm, we'll only report some of the outputs. Th
 
 
 ## Selected results
+NOTE: All the dots are seed centers. Ignore the different colors.
 
 ### **solid_45_cells_noise_random_intensity**
 
@@ -157,6 +158,9 @@ To concisely summarize this algorithm, we'll only report some of the outputs. Th
 * **Precision: 93%**
 * **Recall: 1.9%**
 
+#### Discussion
+* The detected connected components are exactly the blobs in this picture except the algorithm misses 8 blobs (only gets 37/45). The ones it missed are too light and might've been hampered by the salt-pepper noise that interferred with the thresholding (more investigation would be needed to confirm that). Therefore the precision is quite high. The connected component part of the pipeline does well in finding the cells.
+* However the recall is very low. This is because of the explosion of detected seeds. Since the cells have homogenous intensity, the characterics of histopathology cells doesn't apply here. Histopathology cells assume heterogenous responses within the clusters. Therefore each pixel in the connected components were classified as a cell. Maybe if we do strict local maximas that would fix the seed explosion.
 
 
 
@@ -169,14 +173,27 @@ To concisely summarize this algorithm, we'll only report some of the outputs. Th
 * **Precision: 88%**
 * **Recall: 100%**
 
+#### Discussion
+* The cells in this image are much more dispersed than the previosu image and smaller. In this scenario the cells are also heterogenous as in the intensity fades as you move away form the centers. Therefore the seed detection algorithm works in finding those local maximas and we don't see a explosion of seeds. That's why we see a recall of 100%. All the found centers were spot on.
+* However it was unable to find all of the cells. This may be attributed again to the lack of heterogenous structure in overlapping cells. Histopathology images are stained and clear edges are seen but here the clusters are not clearly separated:
+
+ Histopathology             |   Generated
+:-------------------------:|:-------------------------:
+![](https://user-images.githubusercontent.com/8682187/31311432-18c01968-ab7a-11e7-860a-be08d0a2c236.png)|![](https://user-images.githubusercontent.com/8682187/31311433-18c1c57e-ab7a-11e7-8b73-97597d549de7.png)
+
+To improve this we mght need a better parameter search than what the algorithm does automatically.
+
 ### **faded_147_randomized_gauss_cells**
 
  Front             |   Side
-:-------------------------:|:-------------------------:
+:-------------------------:|:-------------------------:|
  ![](https://user-images.githubusercontent.com/8682187/31306018-feb66f46-ab14-11e7-92b3-e28d00e6f2b8.png)|![](https://user-images.githubusercontent.com/8682187/31306017-feb2078a-ab14-11e7-9eab-455902226bb2.png)
 
 * **Precision: 93%**
 * **Recall: 100%**
+
+#### Discussion
+* The result of this experiment is similar as above but much more overlap. It does very well however, still having the problem of missing some overlapping cells.
 
 
 ### **s3617_cutout**
@@ -187,8 +204,14 @@ To concisely summarize this algorithm, we'll only report some of the outputs. Th
 
 **Precision and recall not available.**
 
+#### Discussion
+* The result of running on actual data. We do not have ground truth numbers to see how well the algorithm does. 
+* One thing to note is the structure of the cells. They have large homogenous centers but fading away from the centers so they match a larger gaussian distribution with small variances. We should try to generate a dataset that follows that phenomena closely and see how well it does.
+* It will be interesting to see how well the connected components number does in estimating the number of cells in the image.
 
+# Conclusion
 
+As our first fully unsupervised algorithm we ran, we don't have anything to compare it to but the results surprise me as being seemingly good. We need to run more experiments on datasets that match the test dataset. As we noted in the algorithm outline, only half of the steps are needed to do blob and seed detection. Perhaps we can update this pipeline with more up to date algorithms and more appropriate ones for our data and see how it performs.
 
 
 
