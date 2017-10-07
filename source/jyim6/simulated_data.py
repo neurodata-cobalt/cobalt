@@ -1,6 +1,8 @@
 import sys
+import csv
 sys.path.append('./util/')
 from util.ImageGenerator import ImageGenerator
+from util.helper import write_csv
 
 
 # Feel free to change the dimensions.
@@ -17,6 +19,7 @@ _, centers_1 = img_gen.make_ellipsoidal_image(
     10,
     fname = "solid_45_cells"
 )
+write_csv( centers_1, 'solid_45_cells_centers.csv')
 
 
 # Smaller cells with gaussian blur
