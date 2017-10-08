@@ -1,6 +1,8 @@
 import sys
+import csv
 sys.path.append('./util/')
 from util.ImageGenerator import ImageGenerator
+from util.helper import write_csv
 
 
 # Feel free to change the dimensions.
@@ -17,7 +19,6 @@ _, centers_1 = img_gen.make_ellipsoidal_image(
     10,
     fname = "solid_45_cells"
 )
-
 
 # Smaller cells with gaussian blur
 _, centers_2 = img_gen.make_ellipsoidal_image(
@@ -74,7 +75,6 @@ _, centers_5 = img_gen.make_ellipsoidal_image(
     fname = "faded_147_randomized_cells_random_intensity"
 )
 
-
 # cells distributed standard normal at random with overlaps and fade applied
 _, centers_6 = img_gen.make_ellipsoidal_image(
     15,
@@ -99,7 +99,7 @@ _, centers_7 = img_gen.make_ellipsoidal_image(
     100,
     10,
     random_center = 'gauss',
-    blur = True,    
+    blur = True,
     overlap = True,
     fname = "blurred_320_randomized_gauss_cells",
 )
@@ -112,7 +112,7 @@ _, centers_8 = img_gen.make_ellipsoidal_image(
     100,
     100,
     10,
-    random_center = 'gauss',  
+    random_center = 'gauss',
     overlap = True,
     fname = "solid_320_randomized_gauss_cells",
 )

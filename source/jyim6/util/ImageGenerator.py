@@ -12,7 +12,7 @@ from helper import (
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from scipy import ndimage
-from decorators import save_img
+from decorators import save_img_and_centers
 
 THETA_SAMPLE_SIZE = 500
 GRAY_SCALE_MAX = 255
@@ -96,7 +96,7 @@ class ImageGenerator:
         x,y,z = np.nan_to_num(coord[0]//coord[3])[0], np.nan_to_num(coord[1]//coord[3])[0], np.nan_to_num(coord[2]//coord[3])[0]
         return (x,y,z)
 
-    @save_img
+    @save_img_and_centers
     def make_ellipsoidal_image(
                             self,
                             x_radi,
