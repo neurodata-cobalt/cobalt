@@ -27,7 +27,7 @@ The website linked above has documentation about FARSIGHT and the paper link giv
 # Benchmarks
 
 ## Datasets
-| Dataset number | Dataset name | cell count | noisy | center distribution | cell intensity | type of data
+| Dataset number | Dataset name | cell count | noisy | center distribution | cell intensity | source of data
 | ------- |:--------------:|:------------:|:---------------:|:-----------:|:-------------:|:---------:|
 | 1       | solid_45_cells                              | 45    | No        | fixed array   | solid         | generated
 | 2       | solid_45_cells_noise_random_intensity       | 45    | Yes       | fixed array   | solid         | generated
