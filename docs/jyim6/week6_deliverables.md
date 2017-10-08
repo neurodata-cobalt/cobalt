@@ -37,7 +37,7 @@ The website linked above has documentation about FARSIGHT and the paper link giv
 | 6       | faded_147_randomized_cells_random_intensity | 147   | No        | uniform       | faded         | generated
 | 7       | faded_147_randomized_cells                  | 147   | No        | uniform       | faded         | generated
 | 8       | faded_147_randomized_gauss_cells            | 147   | No        | gaussian      | faded         | generated
-| 9       | s3617_cutout                                | ??    | artifacts | random        | ??            | generated
+| 9       | s3617_cutout                                | ??    | artifacts | random        | ??            | real
 
 
 <!-- * Toy datasets (listed in order from easiest to hardest):
