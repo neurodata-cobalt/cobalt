@@ -1,7 +1,8 @@
 import sys
+import csv
 sys.path.append('./util/')
 from util.ImageGenerator import ImageGenerator
-import csv
+from util.helper import write_csv
 
 
 # Feel free to change the dimensions.
@@ -19,11 +20,6 @@ _, centers_1 = img_gen.make_ellipsoidal_image(
     fname = "solid_45_cells"
 )
 
-with open('solid_45_cells.csv', 'wb') as result_file:
-  wr = csv.writer(result_file, dialect='excel')
-  wr.writerows(centers_1)
-
-
 # Smaller cells with gaussian blur
 _, centers_2 = img_gen.make_ellipsoidal_image(
     15,
@@ -36,10 +32,6 @@ _, centers_2 = img_gen.make_ellipsoidal_image(
     blur_sigma = 5,
     fname = "blurred_147_cells",
 )
-
-with open('blurred_147_cells.csv', 'wb') as result_file:
-  wr = csv.writer(result_file, dialect='excel')
-  wr.writerows(centers_2)
 
 # Solid cells with gaussian noise and random intensity levels
 _, centers_3 = img_gen.make_ellipsoidal_image(
@@ -54,10 +46,6 @@ _, centers_3 = img_gen.make_ellipsoidal_image(
     fname = "solid_45_cells_noise_random_intensity"
 )
 
-with open('solid_45_cells_noise_random_intensity.csv', 'wb') as result_file:
-  wr = csv.writer(result_file, dialect='excel')
-  wr.writerows(centers_3)
-
 
 # Solid cells with gaussian added to the image
 _, centers_4 = img_gen.make_ellipsoidal_image(
@@ -70,10 +58,6 @@ _, centers_4 = img_gen.make_ellipsoidal_image(
     add_img_noise = True,
     fname = "solid_147_cells_img_noise"
 )
-
-with open('solid_147_cells_img_noise.csv', 'wb') as result_file:
-  wr = csv.writer(result_file, dialect='excel')
-  wr.writerows(centers_4)
 
 
 # cells distributed uniformly at random with overlaps and fade applied
@@ -91,10 +75,6 @@ _, centers_5 = img_gen.make_ellipsoidal_image(
     fname = "faded_147_randomized_cells_random_intensity"
 )
 
-with open('faded_147_randomized_cells_random_intensity.csv', 'wb') as result_file:
-  wr = csv.writer(result_file, dialect='excel')
-  wr.writerows(centers_5)
-
 # cells distributed standard normal at random with overlaps and fade applied
 _, centers_6 = img_gen.make_ellipsoidal_image(
     15,
@@ -110,10 +90,6 @@ _, centers_6 = img_gen.make_ellipsoidal_image(
     fname = "faded_147_randomized_gauss_cells"
 )
 
-with open('faded_147_randomized_gauss_cells.csv', 'wb') as result_file:
-  wr = csv.writer(result_file, dialect='excel')
-  wr.writerows(centers_6)
-
 # More cells distributed standard normal at random with overlaps and fade applied
 _, centers_7 = img_gen.make_ellipsoidal_image(
     10,
@@ -128,10 +104,6 @@ _, centers_7 = img_gen.make_ellipsoidal_image(
     fname = "blurred_320_randomized_gauss_cells",
 )
 
-with open('blurred_320_randomized_gauss_cells.csv', 'wb') as result_file:
-  wr = csv.writer(result_file, dialect='excel')
-  wr.writerows(centers_7)
-
 # Same as above but no blurring
 _, centers_8 = img_gen.make_ellipsoidal_image(
     10,
@@ -144,7 +116,3 @@ _, centers_8 = img_gen.make_ellipsoidal_image(
     overlap = True,
     fname = "solid_320_randomized_gauss_cells",
 )
-
-with open('solid_320_randomized_gauss_cells.csv', 'wb') as result_file:
-  wr = csv.writer(result_file, dialect='excel')
-  wr.writerows(centers_8)
