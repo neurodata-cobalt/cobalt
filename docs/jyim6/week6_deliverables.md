@@ -142,7 +142,7 @@ To concisely summarize this algorithm, we'll only report some of the outputs. Th
 | 6       | 129          | 147            | 130             | 441                  | 158      | 85 
 | 7       | 43           | 147            | 45              | 749                  | 156      | 244 
 | 8       | 96          | 147            | 148             | 424                  | 84       | 158 
-| 9       | 405          | 147            | 977             | 330                  | 27       | 27
+| 9       | 405          | ??            | 977             | 330                  | 27       | 27
 
 
 ## Selected results
