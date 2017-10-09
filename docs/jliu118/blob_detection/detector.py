@@ -9,14 +9,17 @@ from tifffile import imsave, imread
 
 import pickle
 
-def detect_blobs(input_file, verbos=False):
-    img_stack = imread(input_file)
-    z_comps = get_component_props(img_stack)
+def detect_blobs(input_stack, output_file, verbos=False):
+    # img_stack = imread(input_file)
+    z_comps = get_component_props(input_stack)
     blob_centroids = reconstruction_3d(z_comps)
+    np.savetxt(output_file + ".csv", blob_centroids, delimiter=",")
     return blob_centroids
 
 def get_component_props(img_stack, output_file=None, verbose=False):
-    (z_dim, y_dim, x_dim) = img_stack.shape
+    z_dim = img_stack.shape[0]
+    y_dim = img_stack.shape[1]
+    x_dim = img_stack.shape[2]
     z_props = []
 
     for k in range(0, z_dim):
