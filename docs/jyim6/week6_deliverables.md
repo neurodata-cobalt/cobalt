@@ -27,7 +27,7 @@ The website linked above has documentation about FARSIGHT and the paper link giv
 # Benchmarks
 
 ## Datasets
-| Dataset number | Dataset name | cell count | noisy | center distribution | cell intensity | type of data
+| Dataset number | Dataset name | cell count | noisy | center distribution | cell intensity | source of data
 | ------- |:--------------:|:------------:|:---------------:|:-----------:|:-------------:|:---------:|
 | 1       | solid_45_cells                              | 45    | No        | fixed array   | solid         | generated
 | 2       | solid_45_cells_noise_random_intensity       | 45    | Yes       | fixed array   | solid         | generated
@@ -37,7 +37,7 @@ The website linked above has documentation about FARSIGHT and the paper link giv
 | 6       | faded_147_randomized_cells_random_intensity | 147   | No        | uniform       | faded         | generated
 | 7       | faded_147_randomized_cells                  | 147   | No        | uniform       | faded         | generated
 | 8       | faded_147_randomized_gauss_cells            | 147   | No        | gaussian      | faded         | generated
-| 9       | s3617_cutout                                | ??    | artifacts | random        | ??            | generated
+| 9       | s3617_cutout                                | ??    | artifacts | random        | ??            | real
 
 
 <!-- * Toy datasets (listed in order from easiest to hardest):
@@ -142,7 +142,7 @@ To concisely summarize this algorithm, we'll only report some of the outputs. Th
 | 6       | 129          | 147            | 130             | 441                  | 158      | 85 
 | 7       | 43           | 147            | 45              | 749                  | 156      | 244 
 | 8       | 96          | 147            | 148             | 424                  | 84       | 158 
-| 9       | 405          | 147            | 977             | 330                  | 27       | 27
+| 9       | 405          | ??            | 977             | 330                  | 27       | 27
 
 
 ## Selected results
