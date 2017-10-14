@@ -136,6 +136,8 @@ Cells and nuclei exhibit large variation in shape but are usually in some sort o
 
 [Yeast cell detection and segmentation in bright field microscopy (2014)](http://ieeexplore.ieee.org/document/6868107/)
 
+[Segmentation of cervical cell nuclei in high-resolution microscopic images: A new algorithm and a web-based software framework](http://www.sciencedirect.com/science/article/pii/S0169260711003191)
+
 ## Radial-symmetry based voting (RST)
 Another technique to locate centroids of cells. However it is computationally intensive but a Fast RST was developed to do fast detection. The idea of the technique is to map the input image into a transformed image where points with high radial symmetry are highlighted. The points with higher responses are marked as centroids. The math is hard to explain without writing equations so it will be left to the review. 
 
