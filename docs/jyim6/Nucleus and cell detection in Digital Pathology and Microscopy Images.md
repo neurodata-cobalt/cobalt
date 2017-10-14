@@ -36,6 +36,9 @@ A distance transform assigns each pixel/voxel with the distance to the nearest f
 
 Therefore while DT is effective at performing simple detection and segmentation, it is not suitable for harder, more complex cells present in images like hisopathological images.
 
+#### Paper links
+[A hybrid 3D watershed algorithm incorporating gradient cues and object models for automatic segmentation of nuclei in confocal image stacks (2003)](https://www.ncbi.nlm.nih.gov/pubmed/14566936)
+
 ## Morphology operations
 A morphological filter is a image processing technique that does combinations of different filtering operations such as erosion, dilation, opening, and closing to uncover some geometric or topological structure of objects in images. Some popular morphological operations are top-hat, bottom-hat, and ultimate erosion (UE) transforms. 
 
@@ -55,6 +58,11 @@ A variation of UE is using a set of multiple filters: four different 7 x 7 mask 
 * Sensitive to noise and can overdetect in noisy images
 * Requires parameter finding
 
+#### Paper links
+[Automated detection of cell nuclei in pap smear images using morphological reconstruction and clustering (2011)](https://www.ncbi.nlm.nih.gov/pubmed/20952343)
+
+[Towards automated cellular image segmentation for RNAi genome-wide screening (2005)](https://www.ncbi.nlm.nih.gov/pubmed/16685930)
+
 ## HIT/HAT
 Closely related to Mophological operations, the HIT operation adds a depth value *h* and then performs an erosion operation that suppresses all the regional minimas whose depth is not larger than *h*. HAT is similar except it supresses the regional maxima whose height is not larger than *h*. The result of HIT/HAT is similar to DT except it removes local minimas caused by uneven object shapes or noise and generates more correct markers. Like DT this technique is used in conjunction with other algorithms like watershed.
 
@@ -66,9 +74,13 @@ HIT/HAT is known to be more stable than DT and is used more widely. The issue is
 * Can be used in conjunction with algoritms like watershed for segmentation
 * Popular
 
-
 #### Cons
 * Requires finding the parameter *h* which is non trivial even with the parameter finding algorithms.
+
+#### Paper links
+[Segmenting clustered nuclei using H-minima transform-based marker extraction and contour parameterization. (2010)](https://www.ncbi.nlm.nih.gov/pubmed/20656653)
+
+[A Method for Automatic Segmentation of Nuclei in Phase-Contrast Images Based on Intensity, Convexity and Texture (2014)](http://ieeexplore.ieee.org/document/6762958/)
 
 ## LoG Filtering
 One of the most popular methods to identify small blob objects in images. The method performs a convolution of the original image with a laplacian operator and a gaussian kernel with a scale parameter to handle object scale invariance. One popular technique is to do a multi-scale LoG blob detector at multiple scales. The most popular methods involve some sort of combination of LoG with another technique to determine the best parameters to use. The most recent methods involve using variations of the Laplacian filter itself such as generalized LoG or Hessian based convolution filters. 
