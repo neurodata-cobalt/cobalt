@@ -36,6 +36,9 @@ A distance transform assigns each pixel/voxel with the distance to the nearest f
 
 Therefore while DT is effective at performing simple detection and segmentation, it is not suitable for harder, more complex cells present in images like hisopathological images.
 
+#### Paper links
+[A hybrid 3D watershed algorithm incorporating gradient cues and object models for automatic segmentation of nuclei in confocal image stacks (2003)](https://www.ncbi.nlm.nih.gov/pubmed/14566936)
+
 ## Morphology operations
 A morphological filter is a image processing technique that does combinations of different filtering operations such as erosion, dilation, opening, and closing to uncover some geometric or topological structure of objects in images. Some popular morphological operations are top-hat, bottom-hat, and ultimate erosion (UE) transforms. 
 
@@ -55,6 +58,11 @@ A variation of UE is using a set of multiple filters: four different 7 x 7 mask 
 * Sensitive to noise and can overdetect in noisy images
 * Requires parameter finding
 
+#### Paper links
+[Automated detection of cell nuclei in pap smear images using morphological reconstruction and clustering (2011)](https://www.ncbi.nlm.nih.gov/pubmed/20952343)
+
+[Towards automated cellular image segmentation for RNAi genome-wide screening (2005)](https://www.ncbi.nlm.nih.gov/pubmed/16685930)
+
 ## HIT/HAT
 Closely related to Mophological operations, the HIT operation adds a depth value *h* and then performs an erosion operation that suppresses all the regional minimas whose depth is not larger than *h*. HAT is similar except it supresses the regional maxima whose height is not larger than *h*. The result of HIT/HAT is similar to DT except it removes local minimas caused by uneven object shapes or noise and generates more correct markers. Like DT this technique is used in conjunction with other algorithms like watershed.
 
@@ -66,9 +74,13 @@ HIT/HAT is known to be more stable than DT and is used more widely. The issue is
 * Can be used in conjunction with algoritms like watershed for segmentation
 * Popular
 
-
 #### Cons
 * Requires finding the parameter *h* which is non trivial even with the parameter finding algorithms.
+
+#### Paper links
+[Segmenting clustered nuclei using H-minima transform-based marker extraction and contour parameterization. (2010)](https://www.ncbi.nlm.nih.gov/pubmed/20656653)
+
+[A Method for Automatic Segmentation of Nuclei in Phase-Contrast Images Based on Intensity, Convexity and Texture (2014)](http://ieeexplore.ieee.org/document/6762958/)
 
 ## LoG Filtering
 One of the most popular methods to identify small blob objects in images. The method performs a convolution of the original image with a laplacian operator and a gaussian kernel with a scale parameter to handle object scale invariance. One popular technique is to do a multi-scale LoG blob detector at multiple scales. The most popular methods involve some sort of combination of LoG with another technique to determine the best parameters to use. The most recent methods involve using variations of the Laplacian filter itself such as generalized LoG or Hessian based convolution filters. 
@@ -82,6 +94,13 @@ One of the most popular methods to identify small blob objects in images. The me
 * Requires parameter finding (filter scale, gaussian parameters, normalizing constant)
 * In almost all applications it has to be combined with another technique for more refinement
 
+#### Paper links
+[Cell counting based on local intensity maxima grouping for in-situ microscopy (2014)](http://ieeexplore.ieee.org/document/6868126/)
+
+[Small Blob Identification in Medical Images Using Regional Features From Optimum Scale (2015)](http://ieeexplore.ieee.org/document/6910292/)
+
+[Cell Nuclei and Cytoplasm Joint Segmentation Using the Sliding Band Filter (2010)](http://ieeexplore.ieee.org/document/5477157/)
+
 ## MSER Detection
 Like LoG, Maximally stable extremal regions (MSER) is used primarily in blob detection. The idea is to generate a set of nested extremal regions based on the level sets in the intensity landscape of an image and determines if these regions are cells -- the cell regions are typically the maximally stable regions. The technique seems math/numerically heavy as in the method in determining if a region is a cell can be done in many ways such solving an optimization problem, using a statistical model to classify regions. Furthermore the region selection has to be done in careful ways to minimizing overlap and be dense enough to get all the cells. 
 
@@ -92,6 +111,11 @@ Like LoG, Maximally stable extremal regions (MSER) is used primarily in blob det
 #### Cons
 * Requires empirically finding the parameters to determine if regions are cells
 * Often requires solving an optimization problem
+
+#### Paper links
+[Detecting overlapping instances in microscopy images using extremal region trees (2016)](http://www.sciencedirect.com/science/article/pii/S1361841515000365)
+
+[An Improved Joint Optimization of Multiple Level Set Functions for the Segmentation of Overlapping Cervical Cells (2016)](http://ieeexplore.ieee.org/document/7005499/)
 
 ## Hough Transform
 Cells and nuclei exhibit large variation in shape but are usually in some sort of elliptical or circular shape. The hough transform makes this assumption and attempts to find the parameters that match the shape of the cell. It computes a hough-transformed image of cell candidates and runs a voting scheme for the different parameters of the shape. The technique then finds the peaks in the transformed parameter space and then determines if the candidate is a cell. The technique is traditionally known to be applied for canonical shapes like ellipsoids but can be extended to any arbitrary shape.
@@ -104,17 +128,37 @@ Cells and nuclei exhibit large variation in shape but are usually in some sort o
 #### Cons
 * Can be slow
 * Seems other methods always couple HT with something else
-* Might generate false peaks due to image noise, incorrect edge extraction, or touching objects. 
+* Might generate false peaks due to image noise, incorrect edge extraction, or touching objects.
+
+#### Paper links
+
+[Cells Segmentation From 3-D Confocal Images of Early Zebrafish Embryogenesis (2009)](http://ieeexplore.ieee.org/document/5280277/)
+
+[Yeast cell detection and segmentation in bright field microscopy (2014)](http://ieeexplore.ieee.org/document/6868107/)
+
+[Segmentation of cervical cell nuclei in high-resolution microscopic images: A new algorithm and a web-based software framework](http://www.sciencedirect.com/science/article/pii/S0169260711003191)
 
 ## Radial-symmetry based voting (RST)
-Another technique to locate centroids of cells. However it is computationally intensive but a Fast RST was developed to do fast detection. The idea of the technique is to map the input image into a transformed image where points with high radial symmetry are highlighted. The points with higher responses are marked as centroids. 
+Another technique to locate centroids of cells. However it is computationally intensive but a Fast RST was developed to do fast detection. The idea of the technique is to map the input image into a transformed image where points with high radial symmetry are highlighted. The points with higher responses are marked as centroids. The math is hard to explain without writing equations so it will be left to the review. 
 
-Honestly I don't know why this is used instead of HT. The method doesn't work well for non-circular images. All the techniques seem pretty old as well. Not going to bother writing the pros and cons. The review listed almost no pros.
+Traditional RST has weaknesses in producing false peaks in the transformed image, parameter selection, and shape variance in cells (traditional RST is built for circular shapes). To overcome these, a new FST method based on an iterative voting approach is adaptive to geometric pertubations and can handle elliptical shapes. Several papers have extended the iterative voting scheme idea to be able to detect cells and their centers. These methods are reported to perform very well especially in the table outlining the various methods. They have the highest Precision/Recall rates for their respective datasets.
 
+#### Paper links
+
+[High-throughput histopathological image analysis via robust cell segmentation and hashing (2015)](http://www.sciencedirect.com/science/article/pii/S1361841515001474)
+
+[Automatic Ki-67 counting using robust cell detection and online dictionary learning (2014)](https://www.ncbi.nlm.nih.gov/pubmed/24557687)
+
+[An Efficient Technique for Nuclei Segmentation Based on Ellipse Descriptor Analysis and Improved Seed Detection Algorithm (2014)](http://ieeexplore.ieee.org/document/6698355/)
 
 ## Supervised learning
 Techniques in Machine learning incolve inferring a mapping function from training data. In cell detection we wish to classify cells from pixel/voxel information. The techniques described in this paper are SVM, Random Forest, and Deep neural networks. Since our interest is in unsupervised methods, I won't expand on these methods for now.
 
-
+## Summary table of detection algorithms, datasets, and available results 
+### Abreviation table
+![](https://user-images.githubusercontent.com/8682187/31572673-44fcf876-b079-11e7-9023-97b91ec4f1a7.png)
+### Algorithms and available results
+![](https://user-images.githubusercontent.com/8682187/31572674-450e0f44-b079-11e7-8209-46e5abcb92d9.png)
+![](https://user-images.githubusercontent.com/8682187/31572675-451c324a-b079-11e7-8228-232fe07271cc.png)
 
 

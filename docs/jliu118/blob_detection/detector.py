@@ -7,13 +7,15 @@ import numpy as np
 
 from tifffile import imsave, imread
 
+import SimpleITK as sitk
+
 import pickle
 
 def detect_blobs(input_stack, output_file, verbos=False):
     # img_stack = imread(input_file)
     z_comps = get_component_props(input_stack)
     blob_centroids = reconstruction_3d(z_comps)
-    np.savetxt(output_file + ".csv", blob_centroids, delimiter=",")
+    np.savetxt(output_file, blob_centroids, delimiter=",")
     return blob_centroids
 
 def get_component_props(img_stack, output_file=None, verbose=False):
@@ -21,9 +23,15 @@ def get_component_props(img_stack, output_file=None, verbose=False):
     y_dim = img_stack.shape[1]
     x_dim = img_stack.shape[2]
     z_props = []
+    
+    bin_stack = np.zeros(img_stack.shape)
 
     for k in range(0, z_dim):
         z_slice = img_stack[k,:,:]
+        
+        if (not np.any(z_slice)):
+            # If all values in the slice are 0, then continue to the next slice
+            continue
         
         # Initial thresholding: making all voxels with intensity less than half of otsu's 0.
         thresh_value = threshold_otsu(z_slice) / 2
@@ -42,12 +50,18 @@ def get_component_props(img_stack, output_file=None, verbose=False):
         erosion = binary_erosion(otsu_thresh, disk(5))
         opening = binary_opening(erosion, disk(5))
         
+        bin_stack[k,:,:] = opening
+        
         # Labelling connected components
         components, num_components = label(opening, return_num=True, connectivity=2)
         if (verbose):
             print('%d detected component(s) for z=%d ' % (num_components, z))
         props = regionprops(components)
         z_props.append(props)
+        
+    # imsave('bin_stack.tif', bin_stack)
+    image = sitk.GetImageFromArray(bin_stack)
+    sitk.WriteImage(sitk.Cast(image, sitk.sitkUInt16), 'bin_stack.tif')
         
     if (output_file != None):
         with open(output_file + '.pkl', 'wb') as f:
