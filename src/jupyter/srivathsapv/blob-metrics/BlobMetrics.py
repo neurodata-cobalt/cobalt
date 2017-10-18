@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import numpy as np
 import math
 from sklearn import decomposition

@@ -1,0 +1,7 @@
+BlobMetrics
+README.md
+setup.py
+blob_metrics.egg-info/PKG-INFO
+blob_metrics.egg-info/SOURCES.txt
+blob_metrics.egg-info/dependency_links.txt
+blob_metrics.egg-info/top_level.txt
