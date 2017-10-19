@@ -1,2 +1,1 @@
-from NeuroDataResource import NeuroDataResource
 

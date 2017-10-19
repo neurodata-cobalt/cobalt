@@ -24,9 +24,14 @@ class ImageDrawer:
 
     @classmethod
     @save_img
-    def draw_centers(cls, img, centers, rgb, copy=False, overwrite=True):
+    def draw_centers(cls, img, centers, rgb, copy=False, overwrite=True, print_level=0):
+        x_range, y_range, z_range, chans = img.shape
+        cls.x_range, cls.y_range, cls.z_range = x_range, y_range, z_range
         drawn_img = np.copy(img) if copy else img
-        for (x, y, z) in centers:
+        i = 1
+        for (z, y, x) in centers:
+            if (i % 2500 == 0) and print_level:
+                print("{} centers drawn".format(i))
             cls.draw_square(drawn_img, x, y, z, 10, rgb, overwrite=overwrite)
         return drawn_img
 
