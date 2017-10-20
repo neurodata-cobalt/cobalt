@@ -2,9 +2,9 @@ import numpy as np
 import sys
 import argparse
 from helper import (
-    save_tif, 
-    min_max, 
-    random_3D, 
+    save_tif,
+    min_max,
+    random_3D,
     bound_check,
     random_val,
     gauss_3D
@@ -32,15 +32,15 @@ class ImageGenerator:
             dim = list(dim)
         return np.random.normal(mean, sigma, dim)
 
-    def _compute_random_transforms(self, 
-                                    max_scale = 3, 
-                                    max_rotation = np.pi*2, 
+    def _compute_random_transforms(self,
+                                    max_scale = 3,
+                                    max_rotation = np.pi*2,
                                     max_shear = 3,
                                     ):
         P = np.zeros((4, 4))
         for i in range(4):
             P[i, i] = 1
-        
+
         # Compute scale
         s_x, s_y, s_z = random_val(max_scale), random_val(max_scale), random_val(max_scale)
         for i, s in enumerate([s_x, s_y, s_z]):
@@ -130,10 +130,10 @@ class ImageGenerator:
                 x_mean, y_mean, z_mean = self._x_range/2, self._y_range/2, self._z_range/2
                 x_sigma, y_sigma, z_sigma = self._x_range/random_center_sigma, self._y_range/random_center_sigma, self._z_range/random_center_sigma  # TODO: Get rid of the arbitrary variances
                 for _ in range(cell_count):
-                    centers.append(gauss_3D(x_mean, y_mean, z_mean, x_sigma, y_sigma, z_sigma)) 
+                    centers.append(gauss_3D(x_mean, y_mean, z_mean, x_sigma, y_sigma, z_sigma))
             else:
                 for _ in range(cell_count):
-                    centers.append(random_3D((0, self._x_range), (0, self._y_range), (0, self._z_range))) 
+                    centers.append(random_3D((0, self._x_range), (0, self._y_range), (0, self._z_range)))
         else:
             for k in range(1, z_n):
                 z = k*(z_radi + z_margin)-1
@@ -182,7 +182,7 @@ class ImageGenerator:
                     if P is not None:
                         x_d, y_d, z_d = self._apply_transform(P, x_d, y_d, z_d)
                     set_rgb(img, x_d, y_d, z_d, gray_val+noise_val, gray_val+noise_val, gray_val+noise_val, overlap=overlap)
-        
+
         # Add gaussian blur
         if blur:
             img = self._gauss_blur(img, sigma = blur_sigma)
@@ -194,7 +194,7 @@ class ImageGenerator:
                 img[:, :, :, i] = img[:, :, :, i] + noise
 
         return img, centers
-    
+
 def compute_fade_level(x,y,z,x_radi, y_radi, z_radi):
     return 1.0 - (x**2/x_radi**2 + y**2/y_radi**2 + z**2/z_radi**2)
 
@@ -231,5 +231,3 @@ def test():
 if __name__ == "__main__":
     # args = arg_parser()
     test()
-
-                
