@@ -61,25 +61,25 @@ class BlobMetrics(object):
 
     return float(len(list(predicted_points_with_match)))
 
-  def _find_nearest_point(self, points, point, edist=None):
+  def _find_nearest_point(self, points, point, edist=None, return_candidate_points=False):
     if edist == None:
       edist = self.edist
 
     min_dist = float('inf')
     nearest_point = None
+    candidate_points = []
 
     for p in points:
       euc_dist = self._euclidean_distance(p, point)
       if euc_dist <= edist and euc_dist < min_dist:
         min_dist = euc_dist
         nearest_point = p
+        candidate_points.append(p)
+
+    if return_candidate_points:
+      return [nearest_point, min_dist, candidate_points]
 
     return [nearest_point, min_dist]
-
-  def _get_relative_color(self, n, max_n):
-    c = (255.0 * n)/max_n
-
-    return [(255-c)/255, (255-c)/255, (255-c)/255, 1]
 
   def accuracy(self):
     return (self.tp/float(len(self.ground_truth_coords))) * 100
@@ -193,5 +193,41 @@ class BlobMetrics(object):
     ax.set_xlabel('Euclidean distance threshold', fontsize=10)
     ax.set_ylabel('Mean Square Error', fontsize=10)
     ax.set_title('Euclidean distance threshold vs Mean Square Error', fontsize=12)
+
+    plt.show()
+
+  def plot_predictions_per_ground_truth(self):
+    counts = {}
+    for p in self.ground_truth_coords:
+      _, _, candidate_points = self._find_nearest_point(self.predicted_coords, p, self.edist, True)
+      c = len(candidate_points)
+      if c not in counts:
+        counts[c] = 1
+      else:
+        counts[c] += 1
+
+    fig, ax = plt.subplots()
+    ax.bar(counts.keys(), counts.values(), width=0.2)
+    ax.set_xlabel('# predictions', fontsize=10)
+    ax.set_ylabel('Count', fontsize=10)
+    ax.set_title('Number of predictions per ground truth label', fontsize=12)
+
+    plt.show()
+
+  def plot_ground_truths_per_prediction(self):
+    counts = {}
+    for p in self.predicted_coords:
+      _, _, candidate_points = self._find_nearest_point(self.ground_truth_coords, p, self.edist, True)
+      c = len(candidate_points)
+      if c not in counts:
+        counts[c] = 1
+      else:
+        counts[c] += 1
+
+    fig, ax = plt.subplots()
+    ax.bar(counts.keys(), counts.values(), width=0.2)
+    ax.set_xlabel('# ground truths', fontsize=10)
+    ax.set_ylabel('Count', fontsize=10)
+    ax.set_title('Number of ground truth labels per prediction', fontsize=12)
 
     plt.show()

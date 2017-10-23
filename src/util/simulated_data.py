@@ -1,8 +1,8 @@
 import sys
 import csv
 sys.path.append('./util/')
-from util.ImageGenerator import ImageGenerator
-from util.helper import write_csv
+from ImageGenerator import ImageGenerator
+from helper import write_csv
 
 
 # Feel free to change the dimensions.
