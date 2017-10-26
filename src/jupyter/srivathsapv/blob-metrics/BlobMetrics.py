@@ -207,9 +207,10 @@ class BlobMetrics(object):
         counts[c] += 1
 
     fig, ax = plt.subplots()
-    ax.bar(counts.keys(), counts.values(), width=0.2)
+    ax.bar(counts.keys(), counts.values())
     ax.set_xlabel('# predictions', fontsize=10)
     ax.set_ylabel('Count', fontsize=10)
+    plt.xticks(counts.keys(), counts.keys())
     ax.set_title('Number of predictions per ground truth label', fontsize=12)
 
     plt.show()
@@ -225,9 +226,10 @@ class BlobMetrics(object):
         counts[c] += 1
 
     fig, ax = plt.subplots()
-    ax.bar(counts.keys(), counts.values(), width=0.2)
+    ax.bar(counts.keys(), counts.values())
     ax.set_xlabel('# ground truths', fontsize=10)
     ax.set_ylabel('Count', fontsize=10)
+    plt.xticks(counts.keys(), counts.keys())
     ax.set_title('Number of ground truth labels per prediction', fontsize=12)
 
     plt.show()
