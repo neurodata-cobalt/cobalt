@@ -15,12 +15,7 @@ from collections import namedtuple
 
 from tifffile import imsave, imread
 from util.Grapher import Grapher
-from util.ImageGenerator import ImageGenerator
-from util.ImageDrawer import ImageDrawer
-from util.helper import (
-    bound_check,
-    set_rgb
-)
+
 from sklearn.mixture import DPGMM, GaussianMixture
 from scipy import ndimage, signal
 IMG_DIR = './img/'
@@ -42,9 +37,6 @@ def raster_3d_generator(img_shape):
 
 DOG_STACK_SIZE = 1
 def DoG(img, gamma = 2, dark_blobs = 1, sigma = 2, print_level = 0):
-    # if the image has white blobs then invert them to being dark blobs
-    if not dark_blobs:
-        img = 1 - img
 
     # Differential difference
     a = 0.5
@@ -282,7 +274,7 @@ class BlobDetector():
 
 # In[4]:
 
-slice_start = 300
+slice_start = 500
 slice_end = 600
 
 tiff_img = imread(IMG_DIR + 'blurred_320_randomized_gauss_cells.tif')
