@@ -167,12 +167,12 @@ def csv_to_3pts(fname, delimiter=' '):
 
 def set_rgb(img, x, y, z, r, g, b):
     img[z, y, x, 0] = r
-    img[z, y, y, 1] = g
+    img[z, y, x, 1] = g
     img[z, y, x, 2] = b
 
 def add_rgb(img, x, y, z, r, g, b):
     img[z, y, x, 0] = min_max(r + img[z, y, x, 0], 255, 0)
-    img[z, y, y, 1] = min_max(g + img[z, y, x, 1], 255, 0)
+    img[z, y, x, 1] = min_max(g + img[z, y, x, 1], 255, 0)
     img[z, y, x, 2] = min_max(b + img[z, y, x, 2], 255, 0)
 
 def min_max(x, minimum, maximum):
