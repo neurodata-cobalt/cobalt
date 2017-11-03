@@ -32,7 +32,7 @@ class ImageDrawer:
         for (z, y, x) in centers:
             if (i % 2500 == 0) and print_level:
                 print("{} centers drawn".format(i))
-            cls.draw_square(drawn_img, x, y, z, 3, rgb, overwrite=overwrite)
+            cls.draw_square(drawn_img, x, y, z, 1, rgb, overwrite=overwrite)
         return drawn_img
 
     @classmethod

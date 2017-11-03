@@ -117,7 +117,7 @@ class BlobMetrics(object):
 
     return math.sqrt(p * r)
 
-  def plot_predictions_with_ground_truth(self):
+  def plot_predictions_with_ground_truth(self, fname=None):
     x_gt = np.array([i[0] for i in self.ground_truth_coords])
     y_gt = np.array([i[1] for i in self.ground_truth_coords])
     z_gt = np.array([i[2] for i in self.ground_truth_coords])
@@ -140,7 +140,11 @@ class BlobMetrics(object):
     ax.set_title('Ground Truth vs Predicted', fontsize=12)
 
     fig.tight_layout()
-    plt.show()
+
+    if fname:
+        plt.savefig(fname)
+    else:
+        plt.show()
 
   def plot_accuracy_sensitivity(self):
     edist_range = list(set([abs(i) for i in range(self.edist-10, self.edist+11)]))
@@ -196,7 +200,7 @@ class BlobMetrics(object):
 
     plt.show()
 
-  def plot_predictions_per_ground_truth(self):
+  def plot_predictions_per_ground_truth(self, fname=None):
     counts = {}
     for p in self.ground_truth_coords:
       _, _, candidate_points = self._find_nearest_point(self.predicted_coords, p, self.edist, True)
@@ -212,10 +216,12 @@ class BlobMetrics(object):
     ax.set_ylabel('Count', fontsize=10)
     plt.xticks(counts.keys(), counts.keys())
     ax.set_title('Number of predictions per ground truth label', fontsize=12)
+    if fname:
+        plt.savefig(fname)
+    else:
+        plt.show()
 
-    plt.show()
-
-  def plot_ground_truths_per_prediction(self):
+  def plot_ground_truths_per_prediction(self, fname=None):
     counts = {}
     for p in self.predicted_coords:
       _, _, candidate_points = self._find_nearest_point(self.ground_truth_coords, p, self.edist, True)
@@ -231,5 +237,7 @@ class BlobMetrics(object):
     ax.set_ylabel('Count', fontsize=10)
     plt.xticks(counts.keys(), counts.keys())
     ax.set_title('Number of ground truth labels per prediction', fontsize=12)
-
-    plt.show()
+    if fname:
+        plt.savefig(fname)
+    else:
+        plt.show()
