@@ -1,3 +1,5 @@
 *.tif
 *.csv
 intern.cfg
+subvolumes/
+subvolumes-normalized/
