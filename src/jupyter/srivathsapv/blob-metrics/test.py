@@ -55,7 +55,7 @@ print(ground_truth_coords[0])
 # In[5]:
 
 
-euclidean_distance_threshold = 250
+euclidean_distance_threshold = 12
 
 
 # ** Define the instance of BlobMetrics **
