@@ -3,3 +3,5 @@
 intern.cfg
 subvolumes/
 subvolumes-normalized/
+annotated-images/
+predicted-images/

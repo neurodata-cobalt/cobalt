@@ -14,7 +14,7 @@ import csv
 from BlobMetrics import BlobMetrics
 import ipyvolume as ipv
 import numpy as np
-
+import sys
 
 # ** Define method to get co-ordinates given the CSV file path **
 
@@ -34,9 +34,12 @@ def get_coords_from_csv(filepath):
 
 # In[3]:
 
+gt_path = sys.argv[1]
+pr_path = sys.argv[2]
+name_prefix = sys.argv[3]
 
-ground_truth_coords = get_coords_from_csv('./data/s3617_manual.csv')
-predicted_coords = get_coords_from_csv('./data/s3617_predicted_nocluster.csv')
+ground_truth_coords = get_coords_from_csv(gt_path)
+predicted_coords = get_coords_from_csv(pr_path)
 
 
 # ** Sample of the CSV file... **
@@ -126,7 +129,7 @@ print('Mean Square Error: {}'.format(mse))
 # In[13]:
 
 
-metrics.plot_predictions_with_ground_truth()
+metrics.plot_predictions_with_ground_truth('./data/plots/{}-prgt.png'.format(name_prefix))
 
 
 # ** Number of predictions per ground truth label **
@@ -134,7 +137,7 @@ metrics.plot_predictions_with_ground_truth()
 # In[14]:
 
 
-metrics.plot_predictions_per_ground_truth()
+metrics.plot_predictions_per_ground_truth('./data/plots/{}-prwgt.png'.format(name_prefix))
 
 
 # ** Number of ground truth labels per prediction **
@@ -142,7 +145,7 @@ metrics.plot_predictions_per_ground_truth()
 # In[15]:
 
 
-metrics.plot_ground_truths_per_prediction()
+metrics.plot_ground_truths_per_prediction('./data/plots/{}-gtwpr.png'.format(name_prefix))
 
 
 # ** Accuracy Sensitivity to Euclidean Distance Threshold **
