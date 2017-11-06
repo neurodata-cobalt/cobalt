@@ -18,8 +18,6 @@ class BlobMetrics(object):
     self.predicted_coords = predicted_coords
     self.edist = euclidean_distance_threshold
 
-    self._get_true_positives()
-
     [self.tp, self.tn, self.fp, self.fn] = self._get_submetrics()
 
   def _get_submetrics(self, edist=None):
@@ -46,11 +44,11 @@ class BlobMetrics(object):
     for p in self.ground_truth_coords:
       point_map[repr(p)] = []
 
-    for p in self.predicted_coords:
-      nearest_point, dist = self._find_nearest_point(self.ground_truth_coords, p, edist)
-      if nearest_point is not None:
-        d = { 'point': p, 'edist': dist}
-        point_map[repr(nearest_point)].append(d)
+    for i, p in enumerate(self.predicted_coords):
+        nearest_point, dist = self._find_nearest_point(self.ground_truth_coords, p, edist)
+        if nearest_point is not None:
+            d = { 'point': p, 'edist': dist}
+            point_map[repr(nearest_point)].append(d)
 
     predicted_points_with_match = set()
     for k in point_map:
@@ -102,7 +100,8 @@ class BlobMetrics(object):
       if nearest_point is not None:
         square_error_sum += self._euclidean_distance(p, nearest_point) ** 2
         n += 1
-
+    if n == 0:
+        return 0
     return square_error_sum/n
 
   def f_measure(self):
@@ -211,10 +210,13 @@ class BlobMetrics(object):
         counts[c] += 1
 
     fig, ax = plt.subplots()
-    ax.bar(counts.keys(), counts.values())
+
+    # import pdb; pdb.set_trace()
+
+    ax.bar(list(counts.keys()), list(counts.values()))
     ax.set_xlabel('# predictions', fontsize=10)
     ax.set_ylabel('Count', fontsize=10)
-    plt.xticks(counts.keys(), counts.keys())
+    plt.xticks(list(counts.keys()), list(counts.keys()))
     ax.set_title('Number of predictions per ground truth label', fontsize=12)
     if fname:
         plt.savefig(fname)
@@ -232,10 +234,10 @@ class BlobMetrics(object):
         counts[c] += 1
 
     fig, ax = plt.subplots()
-    ax.bar(counts.keys(), counts.values())
+    ax.bar(list(counts.keys()), list(counts.values()))
     ax.set_xlabel('# ground truths', fontsize=10)
     ax.set_ylabel('Count', fontsize=10)
-    plt.xticks(counts.keys(), counts.keys())
+    plt.xticks(list(counts.keys()), list(counts.keys()))
     ax.set_title('Number of ground truth labels per prediction', fontsize=12)
     if fname:
         plt.savefig(fname)
