@@ -1,0 +1,7 @@
+#!/bin/bash
+# script to upload tif stacks in ~/Downloads/ to ARA
+
+for var in "$@"
+do
+    python ingest_tif_stack.py -collection cell_detection -experiment cell_detection_"$var" -channel hdog_predictions -tif_stack predicted-images/cell_detection_"$var".tiff --type annotation --new_channel True --source_channel raw_data --config ./intern.cfg
+done
