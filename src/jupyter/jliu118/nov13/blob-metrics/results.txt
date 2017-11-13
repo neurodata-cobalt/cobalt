@@ -1,0 +1,92 @@
+cell_detection_0
+
+Accuracy: 64.7058823529
+Precision: 0.321167883212
+Recall: 0.389380530973
+F-Measure: 0.352
+G-Measure: 0.353633314178
+Mean Square Error: 56.338028169
+
+
+cell_detection_1
+
+Accuracy: 76.4705882353
+Precision: 0.331210191083
+Recall: 0.368794326241
+F-Measure: 0.348993288591
+G-Measure: 0.349497409525
+Mean Square Error: 59.1954022989
+
+
+cell_detection_2
+
+Accuracy: 75.6097560976
+Precision: 0.258333333333
+Recall: 0.281818181818
+F-Measure: 0.269565217391
+G-Measure: 0.269820366731
+Mean Square Error: 55.0961538462
+
+cell_detection_3
+
+Accuracy: 83.9285714286
+Precision: 0.224880382775
+Recall: 0.235
+F-Measure: 0.229828850856
+G-Measure: 0.229884514381
+Mean Square Error: 57.6235294118
+
+
+cell_detection_4
+
+Accuracy: 52.6315789474
+Precision: 0.454545454545
+Recall: 0.769230769231
+F-Measure: 0.571428571429
+G-Measure: 0.591312395989
+Mean Square Error: 559.76923076
+
+cell_detection_5
+
+Accuracy: 84.8484848485
+Precision: 0.234309623431
+Recall: 0.244541484716
+F-Measure: 0.239316239316
+G-Measure: 0.239370890455
+Mean Square Error: 70.086021505
+
+cell_detection_6
+
+Accuracy: 50.9803921569
+Precision: 0.538860103627
+Recall: 0.904347826087
+F-Measure: 0.675324675325
+G-Measure: 0.698080914565
+Mean Square Error: 49.2357723577
+
+cell_detection_7
+
+Accuracy: 51.1111111111
+Precision: 0.589743589744
+Recall: 0.793103448276
+F-Measure: 0.676470588235
+G-Measure: 0.683906188468
+Mean Square Error: 44.75
+
+cell_detection_8
+
+Accuracy: 25.0
+Precision: 0.962264150943
+Recall: 0.252475247525
+F-Measure: 0.4
+G-Measure: 0.492897433239
+Mean Square Error: 885.339622642
+
+cell_detection_9
+
+Accuracy: 31.3953488372
+Precision: 0.818181818182
+Recall: 0.3375
+F-Measure: 0.477876106195
+G-Measure: 0.525486787309
+Mean Square Error: 507.515151515
