@@ -36,7 +36,3 @@ ___
 *This is poorly scoped.  What precisely is the DoD?  AVATR will support what functionality?  The output of cell detection will be ingested and viz links provided?  What about the registration?  AVATR should support that too i would think? And the re-ingest of the bias corrected data? Specify concrete goals and DoDs so we can evaluate effectively. Each week, report on both qualitative and quantitative improvements of performance.*
 
 
-## 2 requirements for each task
-- Documentation of all released code must be compliant with Nature Module. And all python code must be pip installable.
-- Each week, report on both qualitative and quantitative improvements of performance.
-
