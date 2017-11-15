@@ -13,8 +13,6 @@ Our sprint 2 goals and assignees are as follows:
 ___
 # Details:
 
-#### Documentation of all released code must be compliant with Nature Module. And all python code must be pip installable.
-#### Each week, report on both qualitative and quantitative improvements of performance.
 
 1. Registration package - we will have a complete registration package that includes both affine and LDDMM registration, and evaluation. To begin, I will evaluate daniel's registration of Control9 and show to ailey. If registration meets spec, then will be tested on all `Insula*` 🧠 on the boss and shown to Brian for evaluation. Code will be made available on [Github](https://github.com/neurodata/ndreg) and [Docker Hub](https://hub.docker.com/r/neurodata/ndreg/).
 
@@ -36,3 +34,9 @@ ___
 
 
 *This is poorly scoped.  What precisely is the DoD?  AVATR will support what functionality?  The output of cell detection will be ingested and viz links provided?  What about the registration?  AVATR should support that too i would think? And the re-ingest of the bias corrected data? Specify concrete goals and DoDs so we can evaluate effectively. Each week, report on both qualitative and quantitative improvements of performance.*
+
+
+**Note that
+- Documentation of all released code must be compliant with Nature Module. And all python code must be pip installable.
+- Each week, report on both qualitative and quantitative improvements of performance.
+**
