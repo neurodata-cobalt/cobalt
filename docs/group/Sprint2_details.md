@@ -1,16 +1,13 @@
-# Sprint 2 Goals
+# Cobalt Sprint 2 Goals
 
-Vikram Chandrashekhar<br/>
-Srivathsa PV<br/>
-Jason Yim<br/>
-Jonathan Liu<br/>
+##### Team: Vikram Chandrashekhar, Srivathsa PV, Jason Yim, Jonathan Liu
 
-Our sprint 2 goals are as follows
+Our sprint 2 goals and assignees are as follows:
 
-1. Registration package with affine and LDDMM registration
-2. Simple blob detection python package with 1 algorithm (including region-based analysis -- dependent on registration)
-3. demonstrate MVP to reduce gridding artifacts in COLM/La Vision data
-4. work with `avatr` to help integrate our pipeline into their infrastructure / annotate cell/tractography subvolumes
+1. Registration package with affine and LDDMM registration -- `@vikram`
+2. Simple blob detection python package with 1 algorithm (including region-based analysis -- dependent on registration) -- `@srivathsa`
+3. demonstrate MVP to reduce gridding artifacts in COLM/La Vision data -- `@jyim`
+4. work with `avatr` to help integrate our pipeline into their infrastructure / annotate cell/tractography subvolumes -- `@jonl1096`
 
 
 ___
