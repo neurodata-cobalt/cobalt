@@ -35,4 +35,30 @@ ___
 
 *This is poorly scoped.  What precisely is the DoD?  AVATR will support what functionality?  The output of cell detection will be ingested and viz links provided?  What about the registration?  AVATR should support that too i would think? And the re-ingest of the bias corrected data? Specify concrete goals and DoDs so we can evaluate effectively. Each week, report on both qualitative and quantitative improvements of performance.*
 
+_____
+
+# Definition of Done
+
+## Cell Detection Package
+
+### Goals
+
+* Run LoG on the existing annotated subvolumes with a manually chosen scale that works well for most of the data and do quantitative and qualitative evaluation. 
+* Use the cell count results of LoG to obtain region wise cell counts and compare this with annotated cell counts/region.
+* With LoG as the detection algorithm, document the package with usage instructions.
+* Make the package pip installable
+
+### Simulation
+
+* Qualitative evaluation of LoG will be done by uploading the detected results and the annotated results to Boss. 
+* Quantitative evaluation will be done using the _blob-metrics_ package using accuracy, precision, recall and f-measure.
+
+### Application to Real Data
+
+The comparison and evaluation is being done on _ailey-dev_ - _S3617_, _Atenolol2_, and _ISO1_ experiments
+
+### Importance
+
+This will complete a well document cell detection package with LoG as the detection algorithm with qualititative and quantitative evaluation
+
 
