@@ -62,3 +62,19 @@ The comparison and evaluation is being done on _ailey-dev_ - _S3617_, _Atenolol2
 This will complete a well document cell detection package with LoG as the detection algorithm with qualititative and quantitative evaluation
 
 
+## Tractography annotations and evaluation
+
+### Goals
+
+* Generate manual annotations for 5 tractography subvolumes.
+* Implement a tractography evaluation method/package.
+    * The evaluation metric we will start with is the difference between the integrated distance of the manual annotations and machine annotations in each ROI of a registered brain.
+    
+### Importance
+
+Since we plan on implementing an unsupervised tractography package, we will need an annotated dataset and evaluation method to test against.
+
+
+
+
+
