@@ -5,7 +5,7 @@ import numpy as np
 ######## Accuracy ######
 
 hdog_accuracies = [83, 84, 31]
-farsight_accuracies = [60, 52, 27]
+farsight_accuracies = [92, 100, 100]
 
 fig, ax = plt.subplots()
 
@@ -149,3 +149,76 @@ plt.legend()
 
 plt.tight_layout()
 plt.savefig('./data/plots/prgt_fs.png')
+
+##### Cell count ranking HDoG ####
+
+fig, ax = plt.subplots()
+
+index = np.arange(10)
+
+gt_counts = [69, 67, 40, 55, 18, 65, 203, 44, 203, 85]
+hdog_counts = [137, 157, 120, 209, 22, 239, 193, 39, 53, 33]
+xticks = ['cd_0', 'cd_1', 'cd_2', 'cd_3', 'cd_4',
+          'cd_5', 'cd_6', 'cd_7', 'cd_8', 'cd_9']
+
+plt.plot(index, gt_counts, linestyle='-', marker='o', color='g', alpha=opacity, label='Manual annotation')
+plt.plot(index, hdog_counts, linestyle='-', marker='o', color='b', alpha=opacity, label='HDoG')
+
+plt.xlabel('Subvolume Name')
+plt.ylabel('Cell Count')
+plt.title('Cell Count of Manual Annotation vs HDoG')
+plt.xticks(index, xticks)
+
+plt.legend()
+
+plt.tight_layout()
+plt.savefig('./data/plots/hdog_count.png')
+
+##### Cell count ranking FARSIGHT Part 1####
+
+fig, ax = plt.subplots()
+
+index = np.arange(4)
+
+gt_counts = [69, 67, 40, 55]
+farsight_counts = [60, 104, 75, 84]
+
+xticks = ['cd_0', 'cd_1', 'cd_2', 'cd_3']
+
+plt.plot(index, gt_counts, linestyle='-', marker='o', color='g', alpha=opacity, label='Manual annotation')
+plt.plot(index, farsight_counts, linestyle='-', marker='o', color='b', alpha=opacity, label='FARSIGHT')
+
+plt.xlabel('Subvolume Name')
+plt.ylabel('Cell Count')
+plt.title('Cell Count of Manual Annotation vs FARSIGHT')
+plt.xticks(index, xticks)
+
+plt.legend()
+
+plt.tight_layout()
+plt.savefig('./data/plots/farsight_count1.png')
+
+##### Cell count ranking FARSIGHT Part 2####
+
+fig, ax = plt.subplots()
+
+index = np.arange(6)
+
+gt_counts = [18, 65, 203, 44, 203, 85]
+farsight_counts = [64861, 65163, 70987, 80066, 66726, 70250]
+
+plt.plot(index, gt_counts, linestyle='-', marker='o', color='g', alpha=opacity, label='Manual annotation')
+plt.plot(index, farsight_counts, linestyle='-', marker='o', color='b', alpha=opacity, label='FARSIGHT')
+
+plt.xlabel('Subvolume Name')
+plt.ylabel('Cell Count')
+plt.title('Cell Count of Manual Annotation vs FARSIGHT')
+
+xticks = ['cd_4', 'cd_5', 'cd_6', 'cd_7', 'cd_8', 'cd_9']
+
+plt.xticks(index, xticks)
+
+plt.legend()
+
+plt.tight_layout()
+plt.savefig('./data/plots/farsight_count2.png')
