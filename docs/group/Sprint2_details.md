@@ -39,6 +39,16 @@ _____
 
 # Definition of Done
 
+## Registration package
+
+### Goals
+
+* Qualitatively evaluate at least 2 La Vision and 1 COLM registration by uploading to the Boss
+   * ideally this is done at native resolution
+* Quantitatively evaluate at least 2 La Vision and 1 COLM registration by computing fiducial errors 
+* Generate a workflow for getting fiducials on raw data and document this workflow in a Google Doc
+
+
 ## Cell Detection Package
 
 ### Goals
@@ -48,18 +58,15 @@ _____
 * With LoG as the detection algorithm, document the package with usage instructions.
 * Make the package pip installable
 
-### Simulation
+### Application to Real Data
 
+The comparison and evaluation is being done on _ailey-dev_ - _S3617_, _Atenolol2_, and _ISO1_ experiments:
 * Qualitative evaluation of LoG will be done by uploading the detected results and the annotated results to Boss. 
 * Quantitative evaluation will be done using the _blob-metrics_ package using accuracy, precision, recall and f-measure.
 
-### Application to Real Data
-
-The comparison and evaluation is being done on _ailey-dev_ - _S3617_, _Atenolol2_, and _ISO1_ experiments
-
 ### Importance
 
-This will complete a well document cell detection package with LoG as the detection algorithm with qualititative and quantitative evaluation
+This will complete a well documented cell detection package with LoG as the detection algorithm with qualititative and quantitative evaluation.
 
 
 ## Tractography annotations and evaluation
