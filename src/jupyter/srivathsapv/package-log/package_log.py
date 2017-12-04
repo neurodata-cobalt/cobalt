@@ -15,16 +15,17 @@ def draw_square(image, coord, size=2):
 
     return image
 
-with open('cell_detection_3_predicted.csv') as csv_file:
+with open('cell_detection_9_predicted.csv') as csv_file:
     reader = csv.reader(csv_file)
     centroids = [[int(row[0]), int(row[1]), int(row[2])] for row in list(reader)]
 
-ref_image = tiff.imread('cell_detection_3.tiff')
-shape_z, shape_y, shape_x, _ = ref_image.shape
+ref_image = tiff.imread('cell_detection_9.tiff')
+
+shape_z, shape_y, shape_x = ref_image.shape
 
 annotated_image = np.ndarray((shape_z, shape_y, shape_x))
 
 for i, c in enumerate(centroids):
     annotated_image = draw_square(annotated_image, c)
 
-tiff.imsave('cell_detection_3_predicted_empty.tiff', annotated_image.astype(np.uint8))
+tiff.imsave('cell_detection_9_predicted_empty.tiff', annotated_image.astype(np.uint8))
