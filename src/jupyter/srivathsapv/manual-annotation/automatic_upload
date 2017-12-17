@@ -3,5 +3,5 @@
 
 for var in "$@"
 do
-    python ingest_tif_stack.py -collection cell_detection -experiment cell_detection_"$var" -channel hdog_predictions -tif_stack predicted-images/cell_detection_"$var".tiff --type annotation --new_channel True --source_channel raw_data --config ./intern.cfg
+    python ingest_tif_stack.py -collection cell_detection -experiment cell_detection_"$var" -channel thresholded_img -tif_stack ../package-log/cell_detection_"$var"-thresholded.tiff --type image --new_channel True --config ./intern.cfg
 done
