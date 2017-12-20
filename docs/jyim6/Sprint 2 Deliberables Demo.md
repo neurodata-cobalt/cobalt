@@ -1,13 +1,15 @@
 # To run N4ITK bias correction
 1. ssh onto cortex with local 8888 port forwarding
-2. Start the docker by running `docker run -v /media/vikram/braindrive3/:/run/data/ -p 8888:8888 neurodata/ndreg`
-  * If the docker is already running then kill it and run the command again
+2. Start the docker by running `docker run -v /media/vikram/braindrive3/:/run/data/ -p 8888:8888 neurodata/ndreg` 
+  * Note that it has to be ran with this specific volume
+  * If the docker image is not found (you can check this by typing `docker images` and look for neurodata/ndreg) then pull it by running `docker pull neurodata/ndreg` and trying the step again.
+  * Check if the docker is already running by running `docker ps`. If you see the container `neurodata/ndreg` then kill it by running `docker kill <container-id>` and run the command again. Container id is found in the first column when you run `docker ps`.
 3. The terminal should give you a link to paste into your browser and access the jupyter environment. 
-4. Start the notebook in `data/N4 Correction.ipynb`
+4. Start the notebook by navigating to `data/N4 Correction.ipynb`
 5. Run the first 3 blocks (up to **Running N4ITK**). Let it run for about 30 seconds. You should see output like 
   * **On location raw_data/LOC005
     Done with image VW0_LOC005D_CM0_CHN01_PLN0107 in 0.194036006927 seconds**
-6. Pres `ii` to interrupt (or interupt?) then run the last cell to visualize some of the slices before and after correction.
+6. Pres `ii` to interrupt (or interupt?) then run the last cell to visualize some of the slices before and after correction. The point is to just show N4ITK is running successfully on a few images. Running N4ITK on everything will take days. 
 
 # To run Terastitcher
 1. ssh onto cortex with local 8888 port forwarding
