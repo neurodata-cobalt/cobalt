@@ -1,5 +1,6 @@
 # To run N4ITK bias correction
-1. ssh onto cortex with local 8888 port forwarding
+1. ssh onto cortex with local 8888 port forwarding. 
+  * ssh with a command like this `ssh -p 122 -L 8888:localhost:8888 <uname>@cortex.jhu.edu`
 2. Start the docker by running `docker run -v /media/vikram/braindrive3/:/run/data/ -p 8888:8888 neurodata/ndreg` 
   * Note that it has to be ran with this specific volume
   * If the docker image is not found (you can check this by typing `docker images` and look for neurodata/ndreg) then pull it by running `docker pull neurodata/ndreg` and trying the step again.
@@ -13,9 +14,11 @@
 
 # To run Terastitcher
 1. ssh onto cortex with local 8888 port forwarding
-2. Run `/home/jyim6/.local/bin/teraconverter --sfmt="TIFF (unstitched, 3D)" -s=../xml_merging.xml --dfmt="TIFF (series, 2D)"  -d=../s3617_demo_tiles/` 
+2. Change to root by running `su` and typing in your password (I assume Eric has admin/root permissions). 
+3. Change to directory `/media/vikram/braindrive3/` by running `cd /media/vikram/braindrive3/` 
+4. Run `sudo /home/jyim6/.local/bin/teraconverter --sfmt="TIFF (unstitched, 3D)" -s=xml_merging.xml --dfmt="TIFF (series, 2D)"  -d=s3617_demo_tiles/` 
   * You might run into permission errors. In that case please contact me :). 
-3. You should see a notification that says teraconverter has started with a progress bar. It'll stay at 0% for a while because it's 
+5. You should see a notification that says teraconverter has started with a progress bar. It'll stay at 0% for a while because it's 
 computing how much data and how long it estimates it will take. You can wait to see it start to stitch or just believe me that this
 is what I did. 
 
