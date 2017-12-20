@@ -1,15 +1,15 @@
 # To run N4ITK bias correction
 ### These are instructions to run the docker image on cortex. Unfortunately it's not as simple as pulling the image and running it locally because of the data.
 1. ssh onto cortex with local 8888 port forwarding. 
-  * ssh with a command like this `ssh -p 122 -L 8888:localhost:8888 <uname>@cortex.jhu.edu`
+   * ssh with a command like this `ssh -p 122 -L 8888:localhost:8888 <uname>@cortex.jhu.edu`
 2. Start the docker by running `docker run -v /media/vikram/braindrive3/:/run/data/ -p 8888:8888 neurodata/ndreg` 
-  * Note that it has to be ran with this specific volume
-  * If the docker image is not found (you can check this by typing `docker images` and look for neurodata/ndreg) then pull it by running `docker pull neurodata/ndreg` and trying the step again.
-  * Check if the docker is already running by running `docker ps`. If you see the container `neurodata/ndreg` then kill it by running `docker kill <container-id>` and run the command again. Container id is found in the first column when you run `docker ps`.
+   * Note that it has to be ran with this specific volume
+   * If the docker image is not found (you can check this by typing `docker images` and look for neurodata/ndreg) then pull it by running `docker pull neurodata/ndreg` and trying the step again.
+   * Check if the docker is already running by running `docker ps`. If you see the container `neurodata/ndreg` then kill it by running `docker kill <container-id>` and run the command again. Container id is found in the first column when you run `docker ps`.
 3. The terminal should give you a link to paste into your browser and access the jupyter environment. 
 4. Start the notebook by navigating to `data/N4 Correction.ipynb`
 5. Run the first 3 blocks (up to **Running N4ITK**). Let it run for about 30 seconds. You should see output like 
-  * **On location raw_data/LOC005
+   * **On location raw_data/LOC005
     Done with image VW0_LOC005D_CM0_CHN01_PLN0107 in 0.194036006927 seconds**
 6. Pres `ii` to interrupt (or interupt?) then run the last cell to visualize some of the slices before and after correction. The point is to just show N4ITK is running successfully on a few images. Running N4ITK on everything will take days. 
 
@@ -17,7 +17,7 @@
 1. ssh onto cortex
 3. Change to directory `/media/vikram/braindrive3/` by running `cd /media/vikram/braindrive3/` 
 4. Run `./teraconverter --sfmt="TIFF (unstitched, 3D)" -s=xml_merging.xml --dfmt="TIFF (series, 2D)"  -d=s3617_demo_tiles/` 
-  * You shouldn't run into permission issues but if you do then try with `sudo` or go to a root shell by running `su` if you have root permissions.
+   * You shouldn't run into permission issues but if you do then try with `sudo` or go to a root shell by running `su` if you have root permissions.
 5. You should see a notification that says teraconverter has started with a progress bar. It'll stay at 0% for a while because it's 
 computing how much data and how long it estimates it will take. You can wait to see it start to stitch or just believe me that this
 is what I did. 
