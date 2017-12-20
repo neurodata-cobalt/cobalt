@@ -1,4 +1,5 @@
 # To run N4ITK bias correction
+### These are instructions to run the docker image on cortex. Unfortunately it's not as simple as pulling the image and running it locally because of the data.
 1. ssh onto cortex with local 8888 port forwarding. 
   * ssh with a command like this `ssh -p 122 -L 8888:localhost:8888 <uname>@cortex.jhu.edu`
 2. Start the docker by running `docker run -v /media/vikram/braindrive3/:/run/data/ -p 8888:8888 neurodata/ndreg` 
@@ -17,7 +18,6 @@
 2. Change to root by running `su` and typing in your password (I assume Eric has admin/root permissions). 
 3. Change to directory `/media/vikram/braindrive3/` by running `cd /media/vikram/braindrive3/` 
 4. Run `sudo /home/jyim6/.local/bin/teraconverter --sfmt="TIFF (unstitched, 3D)" -s=xml_merging.xml --dfmt="TIFF (series, 2D)"  -d=s3617_demo_tiles/` 
-  * You might run into permission errors. In that case please contact me :). 
 5. You should see a notification that says teraconverter has started with a progress bar. It'll stay at 0% for a while because it's 
 computing how much data and how long it estimates it will take. You can wait to see it start to stitch or just believe me that this
 is what I did. 
