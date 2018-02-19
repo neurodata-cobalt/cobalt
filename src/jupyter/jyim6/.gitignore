@@ -8,3 +8,5 @@ vaa3d_tools/
 *.txt
 FARSIGHT/
 centers/
+multiscale_atlas_reg/
+
