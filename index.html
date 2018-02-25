@@ -21,9 +21,9 @@
   <body>
 
     <!-- Navigation -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#">COBALT</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,18 +35,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#packages">Packages</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="#contributors">Contributors</a>
             </li>
           </ul>
         </div>
       </div>
-    </nav> -->
+    </nav>
 
     <!-- Page Content -->
     <div class="container">
@@ -78,61 +75,145 @@
       <hr />
 
       <!-- Content Row -->
-      <h3>Packages</h3>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-              <img class="card-img-top" src="web/img/ndreg.png" alt="">
-              <div class="card-body">
-                <h2 class="card-title">NDReg</h2>
-                <p class="card-text">Package that performs affine and LDDMM registration.</p>
+      <a name="packages">
+          <h3 name="packages">Packages</h3>
+          <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                  <img class="card-img-top" src="web/img/ndreg.png" alt="">
+                  <div class="card-body">
+                    <h2 class="card-title">NDReg</h2>
+                    <p class="card-text">Package that performs affine and LDDMM registration.</p>
+                  </div>
+                  <div class="card-footer">
+                    <a href="https://github.com/neurodata/ndreg" class="btn btn-primary">Github</a>
+                    <a href="http://ndreg.readthedocs.io/en/latest/" class="btn btn-primary">Docs</a>
+                  </div>
+                </div>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-4 mb-4">
+              <div class="card h-100">
+                <img class="card-img-top" src="web/img/bloby.png" alt="">
+                <div class="card-body">
+                  <h2 class="card-title">Bloby</h2>
+                  <p class="card-text">A python package that performs blob detection on 3D TIF stacks.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="https://github.com/NeuroDataDesign/bloby" class="btn btn-primary">GitHub</a>
+                  <a href="https://neurodatadesign.github.io/bloby/" class="btn btn-primary">Docs</a>
+                  <a href="https://github.com/NeuroDataDesign/bloby/wiki/Detection-Algorithm-Pseudocode" class="btn btn-primary">Algorithm</a>
+                </div>
               </div>
-              <div class="card-footer">
-                <a href="https://github.com/neurodata/ndreg" class="btn btn-primary">Github</a>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-4 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h2 class="card-title">Tractography</h2>
+                  <p class="card-text">In Development.</p>
+                </div>
+                <div class="card-footer">
+                </div>
               </div>
             </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img class="card-img-top" src="web/img/bloby.png" alt="">
-            <div class="card-body">
-              <h2 class="card-title">Bloby</h2>
-              <p class="card-text">A python package that performs blob detection on 3D TIF stacks.</p>
-            </div>
-            <div class="card-footer">
-              <a href="https://github.com/NeuroDataDesign/bloby" class="btn btn-primary">GitHub</a>
-              <a href="https://neurodatadesign.github.io/bloby/" class="btn btn-primary">Docs</a>
-              <a href="https://github.com/NeuroDataDesign/bloby/wiki/Detection-Algorithm-Pseudocode" class="btn btn-primary">Algorithm</a>
-            </div>
-          </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h2 class="card-title">Tractography</h2>
-              <p class="card-text">In Development.</p>
-            </div>
-            <div class="card-footer">
-            </div>
-          </div>
-        </div>
-        <!-- /.col-md-4 -->
+            <!-- /.col-md-4 -->
 
-      </div>
-      <!-- /.row -->
+          </div>
+          <!-- /.row -->
+      </a>
+
+      <hr />
+
+      <a name="contributors">
+          <h3 name="packages">Contributors</h3>
+          <div class="row">
+              <div class="col mb-4">
+                  <div class="card h-100">
+                    <img class="card-img-top" alt="">
+                    <div class="card-body">
+                      <h2 class="card-title"><a href="https://neurodata.io/">Neurodata</a></h2>
+                      <p class="card-text">Package that performs affine and LDDMM registration.</p>
+                    </div>
+                    <!-- <div class="card-footer">
+                    </div> -->
+                  </div>
+              </div>
+            <div class="col mb-4">
+                <div class="card h-100">
+                  <img class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h2 class="card-title"><a href="https://github.com/vikramc1">Vikram Chandrashekhar</a></h2>
+                    <p class="card-text">Package that performs affine and LDDMM registration.</p>
+                  </div>
+                  <!-- <div class="card-footer">
+                  </div> -->
+                </div>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col mb-4">
+              <div class="card h-100">
+                <img class="card-img-top" alt="">
+                <div class="card-body">
+                  <h2 class="card-title"><a href="https://github.com/kkarbasi">Kaveh Karbasi</a></h2>
+                  <p class="card-text">A python package that performs blob detection on 3D TIF stacks.</p>
+                </div>
+                <!-- <div class="card-footer">
+                </div> -->
+              </div>
+            </div>
+            <!-- /.col-md-4 -->
+          </div>
+          <!-- /.row -->
+          <div class="row">
+              <div class="col mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h2 class="card-title"><a href="https://github.com/jonl1096">Jonathan Liu</a></h2>
+                    <p class="card-text">In Development.</p>
+                  </div>
+                  <!-- <div class="card-footer">
+                  </div> -->
+                </div>
+              </div>
+              <!-- /.col-md-4 -->
+              <div class="col mb-4">
+                  <div class="card h-100">
+                    <img class="card-img-top" alt="">
+                    <div class="card-body">
+                      <h2 class="card-title"><a href="https://github.com/srivathsapv">Srivathsa PV</a></h2>
+                      <p class="card-text">Package that performs affine and LDDMM registration.</p>
+                    </div>
+                    <!-- <div class="card-footer">
+                    </div> -->
+                  </div>
+              </div>
+              <div class="col mb-4">
+                  <div class="card h-100">
+                    <img class="card-img-top" alt="">
+                    <div class="card-body">
+                      <h2 class="card-title"><a href="https://github.com/jyim6">Jason Yim</a></h2>
+                      <p class="card-text">Package that performs affine and LDDMM registration.</p>
+                    </div>
+                    <!-- <div class="card-footer">
+                    </div> -->
+                  </div>
+              </div>
+              <!-- /.col -->
+          </div>
+          <!-- /.row -->
+      </a>
 
     </div>
     <!-- /.container -->
 
     <!-- Footer -->
-    <!-- <footer class="py-5 bg-dark">
+    <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-      </div> -->
+        <!-- <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p> -->
+      </div>
       <!-- /.container -->
-    <!-- </footer> -->
+    <!-- </footer>
 
     <!-- Bootstrap core JavaScript -->
     <script src="web/vendor/jquery/jquery.min.js"></script>
