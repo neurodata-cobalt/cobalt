@@ -38,6 +38,7 @@ def register_rigid(atlas, img, learning_rate=1e-2, fixed_mask=None, moving_mask=
     if moving_mask: 
         registration_method.SetMetricMovingMask(moving_mask)
     if fixed_mask:
+        print('here')
         registration_method.SetMetricFixedMask(fixed_mask)
 
     # initial transform
@@ -59,7 +60,7 @@ def register_rigid(atlas, img, learning_rate=1e-2, fixed_mask=None, moving_mask=
                                                   sitk.Cast(atlas, sitk.sitkFloat32))
     return final_transform
 
-def register_affine(atlas, img, learning_rate=1e-2, iters=200, min_step=1e-10, shrink_factors=[1], sigmas=[.150], use_mi=False, grad_tol=1e-6, verbose=False):
+def register_affine(atlas, img, learning_rate=1e-2, fixed_mask=None, moving_mask=None, iters=200, min_step=1e-10, shrink_factors=[1], sigmas=[.150], use_mi=False, grad_tol=1e-6, verbose=False):
     """
     Performs affine registration between an atlas an an image given that they have the same spacing.
     """
@@ -86,6 +87,12 @@ def register_affine(atlas, img, learning_rate=1e-2, iters=200, min_step=1e-10, s
     registration_method.SetShrinkFactorsPerLevel(shrinkFactors=shrink_factors)
     registration_method.SetSmoothingSigmasPerLevel(smoothingSigmas=sigmas)
     registration_method.SmoothingSigmasAreSpecifiedInPhysicalUnitsOn()
+    
+    # set the mask
+    if moving_mask: 
+        registration_method.SetMetricMovingMask(moving_mask)
+    if fixed_mask:
+        registration_method.SetMetricFixedMask(fixed_mask)
 
     # initial transform
     initial_transform = sitk.AffineTransform(atlas.GetDimension())
