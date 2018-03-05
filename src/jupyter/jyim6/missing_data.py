@@ -64,7 +64,7 @@ def plot_mse(img1, img2, blend=0.2, color_blend=False, side_img=None):
         ax4.grid(True)
     
     
-def pad_img_with_range(img, depth_range, height_range, width_range, return_mask=True):
+def pad_img_with_range(img, depth_range=(0,0), height_range=(0,0), width_range=(0,0), return_mask=True):
     ''' User inputs the known padding parameters '''
     img_width, img_height, img_depth = img.GetSize()
     padded_img_width, padded_img_height, padded_img_depth = img_width+sum(width_range), img_height+sum(height_range), img_depth+sum(depth_range)
