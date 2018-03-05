@@ -1,0 +1,145 @@
+[Configurations]
+intern_cfg_path = "./intern.cfg"
+
+
+[Inputs]
+# Parameters for reference atlas to use and target image to register
+
+
+    [Inputs.Target]
+    # Parameters for target image
+  
+  
+        [Inputs.Target.ReadOptions]
+        # Selects which method to read in the image.
+        # If read_path is set then ndreg will load the image at read_path
+        # If Boss values are set then ndreg will download the image from Boss
+        # NOTE: If both are set then read_path will override
+
+          # Path to target image file
+          read_path="./missing_insula/missing_ant_insula_15.img"
+
+          # Boss Collection to access
+          collection="ailey-dev"
+
+          # Boss Experiment to access
+          experiment="Insula_Atenolol-1_171204_new"
+
+          # Boss Channel to access
+          channel="Ch0"
+
+          # Boss Resolution of image to download
+          res=3
+
+
+        [Inputs.Target.ImageData]
+            orientation="lps"
+            normalized=false
+          
+          
+    [Inputs.Reference]
+    # Parameters for reference image
+
+        [Inputs.Reference.ReadOptions]
+        # Selects which method to read in the image.
+        # If read_path is set then ndreg will load the image at read_path
+        # If Boss values are set then ndreg will download the image from Boss
+        # NOTE: If both are set then read_path will override
+
+          # Path to target image file
+          read_path="./atlas/ara_atlas.img"
+
+
+        [Inputs.Reference.ImageData]
+            orientation="pir"
+            normalized=false
+       
+       
+[Registration]
+# Parameters for registration
+
+
+    [Registration.ImagePadding]
+    # For use with missing data.
+    # Pads the image with 0 intensity background
+    # pixels. The x,y,z dimension ranges of volume
+    # will be denoted as width,height,depth respectively.
+    # For example, width_padding=[5,10] will pad the image
+    # 5 pixels to the left and 10 pixels to the right
+    
+        width_padding=[0,0]
+        height_padding=[0,0]
+        depth_padding=[0,0]
+
+        
+    [Registration.TargetMask]
+    # For use with missing data.
+    # Specify a binary metric mask to be used on the target image
+    # during registration steps.
+    # Either read the mask in as a image or create it.
+    # If read_path is set then ndreg will load the mask at read_path
+    # If the ranges are set then a mask will be created as a image of
+    # zeros with the same dimensions as the target image then the 
+    # subimage defined by the ranges will be set to 1.
+    # For example, mask will be initialzed as zero image with  
+    # mask[width_range, height_range, depth_range] = 1
+    # NOTE: If both are set then read_path will override
+
+        read_path="./mask/missing_ant_insula_15_mask.img"
+        width_range=[0,0]
+        height_range=[0,0]
+        depth_range=[0,0]
+        
+        # Indicate whether to use mask during Affine registration or LDDM 
+        use_affine=true
+        use_lddmm=true
+
+
+    [Registration.BiasCorrection]
+    # Parameters for performing Bias Correction
+
+        scale=0.25
+        spline_order=4
+        num_control_points=[5,5,5]
+        iterations_per_resolution=[50,50,50,50]
+ 
+        
+    [Registration.Affine]
+    # Parameters for affine registration
+    
+        learning_rate=1e-1
+        grad_tol=4e-6
+        use_mi=false
+        iterations=50
+        shrink_factors=[4,2,1]
+        sigmas=[0.4,0.2,0.1]
+        verbose=true
+        
+        #save_path= <path>
+
+
+    [Registration.Whiten]
+    # Parameters for whitening
+        
+        alpha=0.25
+        beta=0.25
+        kernel=[10,10,10]
+
+        
+    [Registration.LDDMM]
+    # Parameters for LDDMM
+    
+        alphalist=[0.05]
+        scale_list=[0.0625, 0.125, 0.25, 0.5, 1.0]
+        epsilon_list=5e-3
+        sigma=0.1
+        min_epsilon_list=5e-9
+        use_mi=false
+        iterations=50
+        verbose=true
+
+        #save_path= <path>
+    
+
+[Output]
+save_path = "./output/registration_result.img"
