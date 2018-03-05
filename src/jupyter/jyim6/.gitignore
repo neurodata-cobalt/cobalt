@@ -9,4 +9,6 @@ vaa3d_tools/
 FARSIGHT/
 centers/
 multiscale_atlas_reg/
-
+*.img
+*.hdr
+intermediate_img/
