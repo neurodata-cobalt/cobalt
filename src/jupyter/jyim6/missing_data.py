@@ -5,7 +5,110 @@ import skimage
 from ndreg import preprocessor
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+from matplotlib import cm
+import matplotlib
 
+def plot_annotations(annotations):
+    img = annotations
+    fig = plt.figure()
+    stats = sitk.StatisticsImageFilter()
+    labels_range = [1,-26]
+    cmap = 'hsv'
+    numSlices = 3
+    size = img.GetSize()
+    for i in range(img.GetDimension()):
+        start = size[2 - i] / (numSlices + 1)
+        sliceList = np.linspace(start, size[2 - i] - start, numSlices)
+        sliceSize = list(size)
+        sliceSize[2 - i] = 0
+
+        for (j, slice) in enumerate(sliceList):
+            sliceIndex = [0] * img.GetDimension()
+            sliceIndex[2 - i] = int(slice)
+            sliceImg = sitk.Extract(img, sliceSize, sliceIndex)
+            sliceArray = sitk.GetArrayFromImage(sliceImg)
+            labels = np.unique(sliceArray)[labels_range[0]:labels_range[1]]
+            vmin = min(labels)
+            vmax = max(labels)
+            norm = matplotlib.colors.Normalize(vmin=vmin, vmax=vmax, clip=True)
+            mapper = cm.ScalarMappable(norm=norm, cmap=cmap)
+
+            clr_slice_array = np.zeros(tuple(list(sliceArray.shape)+[4]))
+            for v in labels:
+                clr = mapper.to_rgba(v)
+                clr_slice_array[np.where(sliceArray == v)] = clr
+            clr_slice_array[np.where(sliceArray < labels[0])] = (0.0,0.0,0.0,1.0)
+            clr_slice_array[np.where(sliceArray > labels[-1])] = (0.0,0.0,0.0,1.0)
+
+            plt.subplot(numSlices, img.GetDimension(),
+                     i + img.GetDimension() * j + 1)
+            ax = plt.imshow(clr_slice_array, interpolation='bilinear')
+            plt.axis('off')
+
+    plt.show()
+    
+def plot_mse_with_correct_aspect(img1, img2, blend=0.2, color_blend=False, side_img=None):
+    height, width = img1.shape
+    overlap = np.zeros((height, width)) if not color_blend else np.zeros((height, width, 3))
+    if not color_blend:
+        for i in range(height):
+            for j in range(width):
+                grey = img1[i,j]*blend + img2[i,j]*blend
+                overlap[i,j] = grey
+    else:
+        img1 = img1 + abs(np.amin(img1))
+        img2 = img2 + abs(np.amin(img2))
+        img1_max = np.amax(img1)
+        img2_max = np.amax(img2)
+        for i in range(height):
+            for j in range(width):
+                overlap[i,j,:] = (img1[i,j]/img1_max, 
+                                  img2[i,j]/img2_max, 
+                                  img2[i,j]/img2_max)
+
+    x_errors = []
+    for j in range(width):
+        error = np.sqrt(np.sum(np.square(img1[:,j] - img2[:,j])))
+        x_errors.append(error)
+    x_errors = np.log(np.array(x_errors))
+
+    y_errors = []
+    for i in range(height):
+        error = np.sqrt(np.sum(np.square(img1[i,:] - img2[i,:])))
+        y_errors.append(error)
+    y_errors = np.log(np.array(y_errors))
+    
+    grid_height, grid_width = 2, 3 if side_img is not None else 2
+    aspect= None #float(height)/width # 'auto'
+    gs = gridspec.GridSpec(grid_height, grid_width,width_ratios=[float(width)/4, width, width], height_ratios=[height, height]) 
+    
+    ax1 = plt.subplot(gs[:(grid_height-1), 0])
+    ax2 = plt.subplot(gs[:(grid_height-1), 1:(grid_width//2 + 1)])
+    
+    # Plot the row wise MSE errors
+    ax1.semilogx(y_errors, range(height))
+    
+    # Axes formatting
+    ax1.invert_yaxis()
+    ax1.autoscale(tight=True)
+    ax1.set_xlabel('Log MSE',fontsize=11)
+    ax1.set_ylabel('Row pixel', fontsize=11)
+    
+    # Tick formatting
+    ax1.locator_params(tight=True)
+    ax1.tick_params(direction='in')
+
+    # Plot overlay
+    ax2.imshow(overlap, aspect=aspect)
+    ax2.grid(True)
+    ax2.tick_params(direction='in')
+    
+    # Plot side_img
+    if side_img is not None:
+        ax4 = plt.subplot(gs[:(grid_height-1), (grid_width//2 + 1):])
+        ax4.imshow(side_img, aspect=aspect)
+        ax4.grid(True)
+        ax4.tick_params(direction='in')
     
 def plot_mse(img1, img2, blend=0.2, color_blend=False, side_img=None):
     height, width = img1.shape
