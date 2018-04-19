@@ -61,4 +61,9 @@ class vertices:
 #         vw[self.mask == 0] = 0
         
         return vw
-            
+
+
+
+
+
+           
