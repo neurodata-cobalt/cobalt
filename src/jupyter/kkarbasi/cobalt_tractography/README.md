@@ -1,4 +1,4 @@
-# _COBALT Tractography
+# _COBALT Tractography_
 Package that performs tractography on 3D tiff stack volumes
 
 ## System Requirements
