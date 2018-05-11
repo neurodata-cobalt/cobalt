@@ -16,3 +16,15 @@ tifffile<br/>
 matplotlib <br/>
 scikit_learn <br/>
 scikit-fmm <br/>
+
+## Installation
+run ``` pip install .``` inside cobalt_tractography directory to install the package and its requirements
+
+## Use
+You can now use the functions by importing the following in your python script:
+```
+from cobalt_tractography.bossHandler import *
+from cobalt_tractography.tractography import *
+```
+
+
