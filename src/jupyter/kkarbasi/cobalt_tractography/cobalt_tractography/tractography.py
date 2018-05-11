@@ -221,7 +221,7 @@ class tractoHandler:
         # find indices of non-zero elements in test data:
         closest_voxels = np.empty(nz_data_1.shape)
         for idx, voxel in enumerate(nz_data_1):
-            closest_voxel = find_closest_voxel(voxel , nz_data_2)
+            closest_voxel = self.find_closest_voxel(voxel , nz_data_2)
             closest_voxels[idx,:] = closest_voxel
 
         return closest_voxels    
