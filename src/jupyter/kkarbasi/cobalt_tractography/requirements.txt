@@ -1,0 +1,11 @@
+numpy
+scikit-image
+scikit-learn
+scipy
+matplotlib
+tifffile
+scikit-fmm
+intern
+
+
+
