@@ -18,10 +18,12 @@ from skimage.morphology import skeletonize_3d,label
 from scipy.ndimage.morphology import *
 from tifffile import imsave
 from skimage import img_as_ubyte, img_as_uint, color
+from cobalt_tractography.bossHandler import *
+from cobalt_tractography.tractography import *
 
 # Parameters:
 coll_name = 'ailey-dev'
-exp_name = 'DRN-BLA_2378'
+exp_name = 'Insula_Atenolol-1_171204_new'
 chan_name = 'Ch0'
 
 bHandler = bossHandler(coll_name)
@@ -53,10 +55,12 @@ for xx in x_slices:
         for zz in z_slices:
             data_cutout_raw = bHandler.get_cutout(list(xx) , list(yy), list(zz))
             data_cutout_raw = np.transpose(img_as_uint(data_cutout_raw),(1,2,0))
-            skeleton = run_tractography(data_cutout_raw)
+            th = tractoHandler(data_cutout_raw)
+            skeleton, concomp, concomp_col, data_cutout_binarized =th.run_tractography(1)
+#             skeleton = run_tractography(data_cutout_raw, methodn=3)
             filename = get_filename(xx,yy,zz)
             #save
-            imsave('/run/mount/DRN-BLA_2378_2p_glycerol_Ch0/output_DRN_BLA_2378/' + filename , skeleton)
+            imsave('/run/mount/DRN-BLA_2378_2p_glycerol_Ch0/output_Insula_Atenolol-1_171204_new/' + filename , skeleton)
             #upload_to_boss
 #             chan_resource = rmt.get_channel(chan_name= new_chan_name, coll_name=new_coll_name, exp_name=new_exp_name)
 #             rmt.create_cutout(channel_resource, 0, [xx[0], xx[1]], [yy[0], yy[1]], [zz[0], zz[1]], skeleton)
